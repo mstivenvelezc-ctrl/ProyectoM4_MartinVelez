@@ -24,18 +24,24 @@
         setError("");
 
         if (!form.email || !form.password) {
-        setError("Por favor completa todos los campos.");
-        return;
+            setError("Por favor completa todos los campos.");
+            return;
         }
 
-        if (!form.email.includes("@")) {
-        setError("Ingresa un correo electrónico válido.");
-        return;
+        // Validación de email: debe tener @, dominio después del @ y terminar en .com
+        const emailRegex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+        if (!form.email.includes("@") || !emailRegex.test(form.email)) {
+            setError("Ingresa un correo electrónico válido con dominio y .com");
+            return;
+        }
+        if (!form.email.endsWith('.com')) {
+            setError("El correo debe terminar en .com");
+            return;
         }
 
         if (form.password.length < 6) {
-        setError("La contraseña debe tener al menos 6 caracteres.");
-        return;
+            setError("La contraseña debe tener al menos 6 caracteres.");
+            return;
         }
 
         setLoading(true);
@@ -45,8 +51,8 @@
 
         setLoading(false);
         localStorage.setItem("userToken", "logged");
-    navigate("/taskhome");
-        };
+        navigate("/taskhome");
+    };
 
     return (
         <div className="login-page">
@@ -67,7 +73,7 @@
 
                 {/* Email */}
                 <div className="field">
-                <label htmlFor="email">   Correo electrónico</label>
+                <label htmlFor="email">Correo electrónico</label>
                 <div className="input-wrap">
                     <span className="input-icon">✉</span>
                     <input
@@ -84,7 +90,7 @@
 
                 {/* Password */}
                 <div className="field">
-                <label htmlFor="password">   Contraseña</label>
+                <label htmlFor="password">Contraseña</label>
                 <div className="input-wrap">
                     <span className="input-icon">🔒</span>
                     <input

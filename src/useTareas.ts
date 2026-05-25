@@ -58,12 +58,44 @@
     };
 
     const crearTarea = () => {
+
         if (!titulo.trim() || !descripcion.trim()) {
-        setError("Por favor completa todos los campos.");
-        return;
+            setError("Por favor completa todos los campos.");
+            return;
+        }
+        if (titulo.trim().length < 3) {
+            setError("El título debe tener al menos 3 caracteres.");
+            return;
+        }
+        if (descripcion.trim().length < 5) {
+            setError("La descripción debe tener al menos 5 caracteres.");
+            return;
+        }
+        if (descripcion.trim().length > 200) {
+            setError("La descripción no puede superar los 200 caracteres.");
+            return;
         }
 
+        const ahora = new Date();
         const entrega = fechaEntrega ? new Date(fechaEntrega) : undefined;
+
+        if (entrega) {
+            // Validar que la fecha no sea anterior al día actual
+            const hoy = new Date(ahora.getFullYear(), ahora.getMonth(), ahora.getDate());
+            const fechaEntregaSoloDia = new Date(entrega.getFullYear(), entrega.getMonth(), entrega.getDate());
+            if (fechaEntregaSoloDia < hoy) {
+                setError("La fecha de entrega no puede ser anterior al día de hoy.");
+                return;
+            }
+            // Validar que la hora de entrega sea al menos 30 minutos después de la hora actual si es hoy
+            if (fechaEntregaSoloDia.getTime() === hoy.getTime()) {
+                const mediaHoraDespues = new Date(ahora.getTime() + 30 * 60 * 1000);
+                if (entrega.getTime() < mediaHoraDespues.getTime()) {
+                    setError("La hora de entrega debe ser al menos 30 minutos después de la hora actual.");
+                    return;
+                }
+            }
+        }
 
         const nueva: Tarea = {
         id: crypto.randomUUID(),
