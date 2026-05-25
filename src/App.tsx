@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import './App.css';
 import Login from "./Login.tsx";
+import About from "./about.tsx";
 
 function HomePage() {
   const features = [
@@ -52,10 +53,12 @@ function HomePage() {
       <section className="hero">
         <div className="hero-glow" />
         <div className="hero-content">
-          <h1>
+          <img src="/logo.png" alt="MyTask Logo" className="card-logo" />
+          <h1>My<span>Task</span></h1>
+          <h2>
             Bienvenido a{" "}
             <span className="highlight">Gestion de Tareas</span>
-          </h1>
+          </h2>
           <p className="hero-sub">
             Una aplicación web moderna construida con React y TypeScript.
             Rápida, accesible y lista para crecer.
@@ -127,19 +130,22 @@ function App() {
     <>
       <div className="app">
         {/* NAV */}
-        <nav>
+      <nav>
+        <div className="nav-inner">
           <div className="nav-logo">My<span>Task</span></div>
           <ul className="nav-links">
-            <li><Link to="/">Inicio</Link></li>
+            <li><Link to="/">Home</Link></li>
             <li><Link to="/login">Login</Link></li>
-            <li><a href="#" className="nav-cta">Contacto</a></li>
+            <li><Link to="/about">About</Link></li> 
           </ul>
-        </nav>
+        </div>
+      </nav>
 
         {/* ROUTES */}
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/about" element={<About />} />
         </Routes>
       </div>
     </>

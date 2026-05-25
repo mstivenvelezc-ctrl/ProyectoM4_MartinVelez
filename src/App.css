@@ -34,14 +34,21 @@
     top: 0;
     width: 100%;
     z-index: 100;
-    padding: 1.2rem 3rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    padding: 0;
     background: rgba(10, 10, 15, 0.7);
     backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--border);
   }
+
+  .nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.2rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
 
   .nav-logo {
     font-family: 'Syne', sans-serif;
@@ -49,9 +56,22 @@
     font-size: 1.4rem;
     color: var(--text);
     letter-spacing: -0.5px;
+    flex-shrink: 0;
   }
 
   .nav-logo span {
+    color: var(--accent);
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 2rem;
+    color: var(--text);
+    letter-spacing: -0.5px;
+  }
+
+  h1 span {
     color: var(--accent);
   }
 
@@ -59,6 +79,8 @@
     display: flex;
     gap: 2rem;
     list-style: none;
+    margin-left: auto;
+    flex-shrink: 0;
   }
 
   .nav-links a {
@@ -67,6 +89,7 @@
     font-size: 0.9rem;
     font-weight: 500;
     transition: color 0.2s;
+    white-space: nowrap;
   }
 
   .nav-links a:hover {
@@ -125,17 +148,17 @@
     margin-bottom: 2rem;
   }
 
-  h1 {
+  h2 {
     font-family: 'Syne', sans-serif;
     font-size: clamp(2.8rem, 7vw, 5.5rem);
-    font-weight: 800;
-    line-height: 1.05;
-    letter-spacing: -2px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -1px;
     margin-bottom: 1.5rem;
     color: var(--text);
   }
 
-  h1 .highlight {
+  h2 .highlight {
     background: linear-gradient(135deg, var(--accent), var(--accent2));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -319,6 +342,90 @@
     color: var(--accent);
   }
 
+/* Contenedor interno del nav — limita el ancho en pantallas grandes */
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+  /* ABOUT PAGE */
+  .about-page {
+    min-height: 100vh;
+    padding: 8rem 2rem 4rem;
+    background: var(--bg);
+  }
+
+  .about-container {
+    max-width: 900px;
+    margin: 0 auto;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .about-page h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.2rem, 6vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    margin-bottom: 1.5rem;
+    color: var(--text);
+  }
+
+  .about-page h1 span {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .about-intro {
+    font-size: 1.2rem;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 3rem;
+    font-weight: 300;
+  }
+
+  .about-section {
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .about-section:nth-child(2) {
+    animation-delay: 0.1s;
+  }
+
+  .about-section:nth-child(3) {
+    animation-delay: 0.2s;
+  }
+
+  .about-section:nth-child(4) {
+    animation-delay: 0.3s;
+  }
+
+  .about-section h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text);
+    letter-spacing: -0.5px;
+  }
+
+  .about-section p {
+    font-size: 1rem;
+    color: var(--muted);
+    line-height: 1.8;
+    font-weight: 300;
+  }
+
   /* ANIMATION */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(24px); }
@@ -328,18 +435,27 @@
   /* RESPONSIVE */
   @media (max-width: 1024px) {
     nav {
-      padding: 1rem 2rem;
+      padding: 0.8rem 1.2rem;
+    }
+
+    .nav-logo {
+      font-size: 1.2rem;
     }
 
     .nav-links {
-      gap: 1.5rem;
+      gap: 1rem;
     }
 
     .nav-links a {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
     }
 
-    h1 {
+    .nav-cta {
+      padding: 0.4rem 1rem;
+      font-size: 0.8rem !important;
+    }
+
+    h2 {
       font-size: clamp(1.8rem, 5vw, 4rem);
     }
 
@@ -369,7 +485,7 @@
       font-size: 0.8rem;
     }
 
-    h1 {
+    h2 {
       font-size: clamp(1.4rem, 5vw, 2.8rem);
       margin-bottom: 1rem;
     }
@@ -415,6 +531,34 @@
     .card p {
       font-size: 0.85rem;
     }
+
+    .about-page {
+      padding: 7rem 1.5rem 3rem;
+    }
+
+    .about-page h1 {
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      margin-bottom: 1.3rem;
+    }
+
+    .about-intro {
+      font-size: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .about-section {
+      padding: 1.8rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .about-section h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .about-section p {
+      font-size: 0.95rem;
+    }
   }
 
   @media (max-width: 480px) {
@@ -439,7 +583,7 @@
       font-size: 0.7rem !important;
     }
 
-    h1 {
+    h2 {
       font-size: clamp(2.5rem, 5vw, 2rem);
       margin-bottom: 0.8rem;
       letter-spacing: -1px;
@@ -502,6 +646,34 @@
     .card-icon {
       font-size: 1.5rem;
       margin-bottom: 0.8rem;
+    }
+
+    .about-page {
+      padding: 6rem 1rem 2rem;
+    }
+
+    .about-page h1 {
+      font-size: clamp(1.6rem, 5vw, 2.5rem);
+      margin-bottom: 1.2rem;
+    }
+
+    .about-intro {
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+    }
+
+    .about-section {
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .about-section h2 {
+      font-size: 1.3rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .about-section p {
+      font-size: 0.9rem;
     }
   }
 

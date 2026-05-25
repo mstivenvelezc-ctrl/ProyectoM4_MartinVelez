@@ -366,124 +366,124 @@
     to { transform: rotate(360deg); }
     }
 
-    /* RESPONSIVE */
-    @media (max-width: 480px) {
-      .card {
-        padding: 2rem 1.8rem 1.8rem;
-        max-width: 100%;
-      }
+        /* RESPONSIVE */
+        @media (max-width: 480px) {
+        .card {
+            padding: 2rem 1.8rem 1.8rem;
+            max-width: 100%;
+        }
 
-      .card::before {
-        left: 1.8rem;
-        right: 1.8rem;
-      }
+        .card::before {
+            left: 1.8rem;
+            right: 1.8rem;
+        }
 
-      .card-logo {
-        max-width: 100px;
-        margin-bottom: 1.2rem;
-      }
+        .card-logo {
+            max-width: 100px;
+            margin-bottom: 1.2rem;
+        }
 
-      .brand {
-        font-size: 0.7rem;
-        padding: 0.3rem 0.8rem;
-        margin-bottom: 1rem;
-      }
+        .brand {
+            font-size: 0.7rem;
+            padding: 0.3rem 0.8rem;
+            margin-bottom: 1rem;
+        }
 
-      .card-title {
-        font-size: clamp(1.3rem, 5vw, 1.8rem);
-        margin-bottom: 0.4rem;
-      }
+        .card-title {
+            font-size: clamp(1.3rem, 5vw, 1.8rem);
+            margin-bottom: 0.4rem;
+        }
 
-      .card-subtitle {
-        font-size: 0.8rem;
-      }
+        .card-subtitle {
+            font-size: 0.8rem;
+        }
 
-      .form {
-        gap: 0.9rem;
-      }
+        .form {
+            gap: 0.9rem;
+        }
 
-      .field {
-        gap: 0.35rem;
-      }
+        .field {
+            gap: 0.35rem;
+        }
 
-      input[type="email"],
-      input[type="password"],
-      input[type="text"] {
-        padding: 0.7rem 0.9rem 0.7rem 2.4rem;
-        font-size: 0.85rem;
-      }
+        input[type="email"],
+        input[type="password"],
+        input[type="text"] {
+            padding: 0.7rem 0.9rem 0.7rem 2.4rem;
+            font-size: 0.85rem;
+        }
 
-      .btn-submit {
-        padding: 0.75rem;
-        font-size: 0.88rem;
-      }
-    }
+        .btn-submit {
+            padding: 0.75rem;
+            font-size: 0.88rem;
+        }
+        }
 
-    @media (max-width: 380px) {
-      .card {
-        padding: 1.5rem 1.2rem 1.2rem;
-      }
+        @media (max-width: 380px) {
+        .card {
+            padding: 1.5rem 1.2rem 1.2rem;
+        }
 
-      .card::before {
-        left: 1.2rem;
-        right: 1.2rem;
-      }
+        .card::before {
+            left: 1.2rem;
+            right: 1.2rem;
+        }
 
-      .card-logo {
-        max-width: 80px;
-        margin-bottom: 1rem;
-      }
+        .card-logo {
+            max-width: 80px;
+            margin-bottom: 1rem;
+        }
 
-      .brand {
-        font-size: 0.65rem;
-        padding: 0.25rem 0.6rem;
-      }
+        .brand {
+            font-size: 0.65rem;
+            padding: 0.25rem 0.6rem;
+        }
 
-      .card-title {
-        font-size: clamp(1.1rem, 4vw, 1.5rem);
-        margin-bottom: 0.3rem;
-        letter-spacing: -0.5px;
-      }
+        .card-title {
+            font-size: clamp(1.1rem, 4vw, 1.5rem);
+            margin-bottom: 0.3rem;
+            letter-spacing: -0.5px;
+        }
 
-      .card-header {
-        margin-bottom: 1.5rem;
-      }
+        .card-header {
+            margin-bottom: 1.5rem;
+        }
 
-      .card-subtitle {
-        font-size: 0.75rem;
-      }
+        .card-subtitle {
+            font-size: 0.75rem;
+        }
 
-      label {
-        font-size: 0.7rem;
-      }
+        label {
+            font-size: 0.7rem;
+        }
 
-      input[type="email"],
-      input[type="password"],
-      input[type="text"] {
-        padding: 0.6rem 0.8rem 0.6rem 2.2rem;
-        font-size: 0.8rem;
-      }
+        input[type="email"],
+        input[type="password"],
+        input[type="text"] {
+            padding: 0.6rem 0.8rem 0.6rem 2.2rem;
+            font-size: 0.8rem;
+        }
 
-      .input-icon {
-        left: 0.7rem;
-        font-size: 0.85rem;
-      }
+        .input-icon {
+            left: 0.7rem;
+            font-size: 0.85rem;
+        }
 
-      .btn-submit {
-        padding: 0.65rem;
-        font-size: 0.8rem;
-        margin-top: 0.2rem;
-      }
+        .btn-submit {
+            padding: 0.65rem;
+            font-size: 0.8rem;
+            margin-top: 0.2rem;
+        }
 
-      .forgot {
-        font-size: 0.7rem;
-      }
+        .forgot {
+            font-size: 0.7rem;
+        }
 
-      .divider span {
-        font-size: 0.7rem;
-      }
+        .divider span {
+            font-size: 0.7rem;
+        }
 
-      .register-link {
-        font-size: 0.75rem;
-      }
-    }
+        .register-link {
+            font-size: 0.75rem;
+        }
+        }
