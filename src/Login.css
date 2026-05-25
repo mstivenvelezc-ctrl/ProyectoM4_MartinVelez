@@ -156,7 +156,10 @@
 
     .input-wrap {
     position: relative;
+    width: 100%;
+    padding-left: 2.5rem;
     }
+
 
     .input-icon {
     position: absolute;

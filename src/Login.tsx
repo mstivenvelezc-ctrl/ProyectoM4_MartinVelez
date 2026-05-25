@@ -67,7 +67,7 @@
 
                 {/* Email */}
                 <div className="field">
-                <label htmlFor="email">Correo electrónico</label>
+                <label htmlFor="email">   Correo electrónico</label>
                 <div className="input-wrap">
                     <span className="input-icon">✉</span>
                     <input
@@ -84,7 +84,7 @@
 
                 {/* Password */}
                 <div className="field">
-                <label htmlFor="password">Contraseña</label>
+                <label htmlFor="password">   Contraseña</label>
                 <div className="input-wrap">
                     <span className="input-icon">🔒</span>
                     <input
