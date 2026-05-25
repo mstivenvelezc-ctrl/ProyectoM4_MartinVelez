@@ -1,0 +1,41 @@
+// src/Routes/TaskRouter.tsx
+import { Link, Routes, Route, useNavigate } from 'react-router-dom';
+import TaskHome from '../TaskHome';
+import Tareas from '../tareas';
+
+export default function TaskRouter() {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem('userToken');
+    navigate('/login');
+  };
+
+  return (
+    <div className="app">
+      <nav>
+        <div className="nav-inner">
+          <div className="nav-logo">My<span>Task</span></div>
+          <ul className="nav-links">
+            <li><Link to="/taskhome">Home</Link></li>
+            <li><Link to="/taskhome/tareas">Tareas</Link></li>
+            <li>
+              <button
+                className="btn-logout"
+                onClick={handleLogout}
+                style={{ background: 'none', border: 'none', color: 'var(--text)', cursor: 'pointer', fontSize: '1rem' }}
+              >
+                Logout
+              </button>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <Routes>
+        <Route index element={<TaskHome />} />
+        <Route path="tareas" element={<Tareas />} />
+      </Routes>
+    </div>
+  );
+}

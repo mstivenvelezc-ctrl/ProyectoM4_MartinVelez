@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
-import { Routes, Route, Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './App.css';
-import Login from "./Login.tsx";
-import About from "./about.tsx";
 
 function HomePage() {
   const features = [
@@ -126,31 +124,7 @@ function App() {
     document.title = "MyTask";
   }, []);
 
-  return (
-    <>
-      <div className="app">
-        {/* NAV */}
-      <nav>
-        <div className="nav-inner">
-          <div className="nav-logo">My<span>Task</span></div>
-          <ul className="nav-links">
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/login">Login</Link></li>
-            <li><Link to="/about">About</Link></li> 
-          </ul>
-        </div>
-      </nav>
-
-        {/* ROUTES */}
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/about" element={<About />} />
-        </Routes>
-      </div>
-    </>
-  );
+  return <HomePage />;
 }
-
 
 export default App;

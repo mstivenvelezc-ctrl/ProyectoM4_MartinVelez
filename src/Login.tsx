@@ -1,4 +1,5 @@
     import { useState } from "react";
+    import { useNavigate } from "react-router-dom";
     import "./Login.css";
 
     interface LoginForm {
@@ -7,10 +8,10 @@
     }
 
     export default function Login() {
+    const navigate = useNavigate();
     const [form, setForm] = useState<LoginForm>({ email: "", password: "" });
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>("");
-    const [success, setSuccess] = useState<boolean>(false);
     const [showPassword, setShowPassword] = useState<boolean>(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,8 +44,9 @@
         await new Promise((r) => setTimeout(r, 1500));
 
         setLoading(false);
-        setSuccess(true);
-    };
+        localStorage.setItem("userToken", "logged");
+    navigate("/taskhome");
+        };
 
     return (
         <div className="login-page">
@@ -61,9 +63,6 @@
             </p>
             </div>
 
-            {success ? (
-            <p className="success-msg">✓ Sesión iniciada correctamente</p>
-            ) : (
             <form className="form" onSubmit={handleSubmit} noValidate>
 
                 {/* Email */}
@@ -136,7 +135,6 @@
                 </p>
 
             </form>
-            )}
         </div>
         </div>
     );

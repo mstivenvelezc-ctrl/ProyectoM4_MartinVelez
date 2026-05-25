@@ -1,0 +1,84 @@
+:root {
+  --bg: #0a0a0f;
+  --surface: #111118;
+  --accent: #6c63ff;
+  --accent2: #ff6584;
+  --text: #f0f0f8;
+  --muted: #7070a0;
+  --border: rgba(108, 99, 255, 0.2);
+}
+
+.tareas-page {
+  min-height: 100vh;
+  padding: 8rem 2rem 4rem;
+  background: var(--bg);
+}
+
+.tareas-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.tareas-page h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2.2rem, 6vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  margin-bottom: 1.5rem;
+  color: var(--text);
+}
+
+.tareas-page h1 span {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.tareas-page p {
+  font-size: 1.1rem;
+  color: var(--muted);
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .tareas-page {
+    padding: 7rem 1.5rem 3rem;
+  }
+
+  .tareas-page h1 {
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    margin-bottom: 1.3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .tareas-page {
+    padding: 6.5rem 1.2rem 2.5rem;
+  }
+
+  .tareas-page h1 {
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+  }
+
+  .tareas-page p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .tareas-page {
+    padding: 6rem 1rem 2rem;
+  }
+
+  .tareas-page h1 {
+    font-size: clamp(1.4rem, 5vw, 2rem);
+    margin-bottom: 1rem;
+  }
+
+  .tareas-page p {
+    font-size: 0.95rem;
+  }
+}
