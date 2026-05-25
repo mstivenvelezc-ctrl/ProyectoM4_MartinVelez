@@ -1,6 +1,7 @@
 // src/tareas.tsx
 import { useEffect } from "react";
 import { useTareas } from "./useTareas";
+import type { Tarea } from "./useTareas";
 import './tareas.css';
 
 function Tareas() {
@@ -9,9 +10,11 @@ function Tareas() {
     modalAbierto,
     titulo,
     descripcion,
+    fechaEntrega,
     error,
     setTitulo,
     setDescripcion,
+    setFechaEntrega,
     abrirModal,
     cerrarModal,
     crearTarea,
@@ -22,6 +25,12 @@ function Tareas() {
   useEffect(() => {
     document.title = "MyTask - Tareas";
   }, []);
+
+  const etiquetaEstado = (tarea: Tarea) => {
+    if (tarea.estado === "prioridad") return <span className="badge badge-prioridad">⚠ Prioridad</span>;
+    if (tarea.estado === "perdida") return <span className="badge badge-perdida">✕ Tarea Perdida</span>;
+    return <span className="badge badge-normal">● Activa</span>;
+  };
 
   return (
     <>
@@ -38,20 +47,37 @@ function Tareas() {
             <p className="tareas-empty">No tienes tareas aún. ¡Crea una!</p>
           ) : (
             <div className="tareas-lista">
-              {tareas.map((tarea) => (
-                <div className="tarea-card" key={tarea.id}>
+              {tareas.map((tarea: Tarea) => (
+                <div
+                  className={`tarea-card tarea-card--${tarea.estado}`}
+                  key={tarea.id}
+                >
                   <div className="tarea-card-header">
-                    <h3 className="tarea-titulo">{tarea.titulo}</h3>
-                    <span className="tarea-fecha">{formatearFecha(tarea.fechaHora)}</span>
+                    <div className="tarea-card-titulo-row">
+                      <h3 className="tarea-titulo">{tarea.titulo}</h3>
+                      {etiquetaEstado(tarea)}
+                    </div>
+                    <span className="tarea-fecha">Creada: {formatearFecha(tarea.fechaHora)}</span>
                   </div>
+
                   <p className="tarea-descripcion">{tarea.descripcion}</p>
+
+                  {tarea.fechaEntrega && (
+                    <p className="tarea-entrega">
+                      🕐 Entrega: {formatearFecha(tarea.fechaEntrega)}
+                    </p>
+                  )}
+
                   <div className="tarea-card-footer">
-                    <button
-                      className="btn-finalizar"
-                      onClick={() => eliminarTarea(tarea.id)}
-                    >
-                      ✓ Finalizar
-                    </button>
+                    {tarea.estado === "perdida" ? (
+                      <button className="btn-eliminar" onClick={() => eliminarTarea(tarea.id)}>
+                        ✕ Eliminar
+                      </button>
+                    ) : (
+                      <button className="btn-finalizar" onClick={() => eliminarTarea(tarea.id)}>
+                        ✓ Finalizar
+                      </button>
+                    )}
                   </div>
                 </div>
               ))}
@@ -89,6 +115,16 @@ function Tareas() {
                   value={descripcion}
                   onChange={(e) => setDescripcion(e.target.value)}
                   rows={4}
+                />
+              </div>
+
+              <div className="field">
+                <label htmlFor="fechaEntrega">Fecha y hora de entrega <span className="label-opcional">(opcional)</span></label>
+                <input
+                  id="fechaEntrega"
+                  type="datetime-local"
+                  value={fechaEntrega}
+                  onChange={(e) => setFechaEntrega(e.target.value)}
                 />
               </div>
 

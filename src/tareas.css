@@ -71,32 +71,65 @@
   line-height: 1.6;
 }
 
-/* LISTA DE TAREAS */
+/* LISTA */
 .tareas-lista {
   display: grid;
   gap: 1.2rem;
 }
 
+/* CARD BASE */
 .tarea-card {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 1.5rem 2rem;
   animation: fadeUp 0.4s ease both;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.3s;
 }
 
 .tarea-card:hover {
-  border-color: rgba(108, 99, 255, 0.5);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
+/* ESTADO: normal */
+.tarea-card--normal {
+  border-color: var(--border);
+}
+.tarea-card--normal:hover {
+  border-color: rgba(108, 99, 255, 0.5);
+}
+
+/* ESTADO: prioridad (<=24h) */
+.tarea-card--prioridad {
+  border-color: rgba(255, 101, 132, 0.5);
+  background: rgba(255, 101, 132, 0.05);
+}
+.tarea-card--prioridad:hover {
+  border-color: rgba(255, 101, 132, 0.8);
+  box-shadow: 0 8px 32px rgba(255, 101, 132, 0.15);
+}
+
+/* ESTADO: perdida */
+.tarea-card--perdida {
+  border-color: rgba(180, 30, 30, 0.5);
+  background: rgba(180, 30, 30, 0.07);
+  opacity: 0.85;
+}
+.tarea-card--perdida:hover {
+  border-color: rgba(200, 40, 40, 0.7);
+  box-shadow: 0 8px 32px rgba(180, 30, 30, 0.2);
+}
+
 .tarea-card-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 1rem;
   margin-bottom: 0.75rem;
+}
+
+.tarea-card-titulo-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.3rem;
 }
 
 .tarea-titulo {
@@ -107,20 +140,67 @@
   margin: 0;
 }
 
+/* BADGES */
+.badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.25rem 0.7rem;
+  border-radius: 100px;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+.badge-normal {
+  background: rgba(108, 99, 255, 0.12);
+  color: var(--accent);
+  border: 1px solid rgba(108, 99, 255, 0.3);
+}
+
+.badge-prioridad {
+  background: rgba(255, 101, 132, 0.15);
+  color: #ff6584;
+  border: 1px solid rgba(255, 101, 132, 0.4);
+  animation: pulse 2s infinite;
+}
+
+.badge-perdida {
+  background: rgba(180, 30, 30, 0.2);
+  color: #e05555;
+  border: 1px solid rgba(180, 30, 30, 0.4);
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
 .tarea-fecha {
   font-size: 0.78rem;
   color: var(--muted);
-  white-space: nowrap;
-  margin-top: 0.2rem;
-  flex-shrink: 0;
 }
 
 .tarea-descripcion {
   font-size: 0.9rem;
   color: var(--muted);
   line-height: 1.65;
-  margin: 0 0 1.2rem;
+  margin: 0 0 0.75rem;
   font-weight: 300;
+}
+
+.tarea-entrega {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin: 0 0 1.2rem;
+}
+
+.tarea-card--prioridad .tarea-entrega {
+  color: #ff6584;
+  font-weight: 500;
+}
+
+.tarea-card--perdida .tarea-entrega {
+  color: #e05555;
+  font-weight: 500;
 }
 
 .tarea-card-footer {
@@ -144,6 +224,25 @@
 .btn-finalizar:hover {
   background: var(--accent);
   border-color: var(--accent);
+  color: #fff;
+}
+
+.btn-eliminar {
+  background: transparent;
+  border: 1px solid rgba(180, 30, 30, 0.4);
+  color: #e05555;
+  padding: 0.45rem 1.1rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.btn-eliminar:hover {
+  background: rgba(180, 30, 30, 0.8);
+  border-color: transparent;
   color: #fff;
 }
 
@@ -229,6 +328,12 @@
   letter-spacing: 0.3px;
 }
 
+.label-opcional {
+  font-weight: 300;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
 .field input,
 .field textarea {
   background: rgba(255, 255, 255, 0.04);
@@ -241,6 +346,10 @@
   outline: none;
   resize: none;
   transition: border-color 0.2s;
+}
+
+.field input[type="datetime-local"] {
+  color-scheme: dark;
 }
 
 .field input::placeholder,
@@ -316,69 +425,25 @@
 
 /* RESPONSIVE */
 @media (max-width: 1024px) {
-  .tareas-page {
-    padding: 7rem 1.5rem 3rem;
-  }
-  .tareas-page h1 {
-    font-size: clamp(1.8rem, 5vw, 2.8rem);
-  }
+  .tareas-page { padding: 7rem 1.5rem 3rem; }
+  .tareas-page h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); }
 }
 
 @media (max-width: 768px) {
-  .tareas-page {
-    padding: 6.5rem 1.2rem 2.5rem;
-  }
-  .tareas-page h1 {
-    font-size: clamp(1.6rem, 5vw, 2.4rem);
-  }
-  .tarea-card {
-    padding: 1.2rem 1.5rem;
-  }
-  .tarea-card-header {
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-  .modal-header,
-  .modal-body,
-  .modal-footer {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
+  .tareas-page { padding: 6.5rem 1.2rem 2.5rem; }
+  .tareas-page h1 { font-size: clamp(1.6rem, 5vw, 2.4rem); }
+  .tarea-card { padding: 1.2rem 1.5rem; }
+  .modal-header, .modal-body, .modal-footer { padding-left: 1.5rem; padding-right: 1.5rem; }
 }
 
 @media (max-width: 480px) {
-  .tareas-page {
-    padding: 6rem 1rem 2rem;
-  }
-  .tareas-page h1 {
-    font-size: clamp(1.4rem, 5vw, 2rem);
-  }
-  .tareas-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .btn-nueva-tarea {
-    width: 100%;
-    text-align: center;
-  }
-  .tarea-card {
-    padding: 1rem 1.2rem;
-  }
-  .modal {
-    border-radius: 12px;
-  }
-  .modal-header,
-  .modal-body,
-  .modal-footer {
-    padding-left: 1.2rem;
-    padding-right: 1.2rem;
-  }
-  .modal-footer {
-    flex-direction: column;
-  }
-  .btn-cancelar,
-  .btn-crear {
-    width: 100%;
-    text-align: center;
-  }
+  .tareas-page { padding: 6rem 1rem 2rem; }
+  .tareas-page h1 { font-size: clamp(1.4rem, 5vw, 2rem); }
+  .tareas-header { flex-direction: column; align-items: flex-start; }
+  .btn-nueva-tarea { width: 100%; text-align: center; }
+  .tarea-card { padding: 1rem 1.2rem; }
+  .modal { border-radius: 12px; }
+  .modal-header, .modal-body, .modal-footer { padding-left: 1.2rem; padding-right: 1.2rem; }
+  .modal-footer { flex-direction: column; }
+  .btn-cancelar, .btn-crear { width: 100%; text-align: center; }
 }

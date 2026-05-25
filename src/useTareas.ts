@@ -1,11 +1,26 @@
     // src/useTareas.ts
-    import { useState } from "react";
+    import { useState, useEffect } from "react";
+
+    export type EstadoTarea = "normal" | "prioridad" | "perdida";
 
     export interface Tarea {
     id: string;
     titulo: string;
     descripcion: string;
     fechaHora: Date;
+    fechaEntrega?: Date;
+    estado: EstadoTarea;
+    }
+
+    function calcularEstado(fechaEntrega?: Date): EstadoTarea {
+    if (!fechaEntrega) return "normal";
+    const ahora = new Date();
+    const diff = fechaEntrega.getTime() - ahora.getTime();
+    const horasRestantes = diff / (1000 * 60 * 60);
+
+    if (horasRestantes < 0) return "perdida";
+    if (horasRestantes <= 24) return "prioridad";
+    return "normal";
     }
 
     export function useTareas() {
@@ -13,11 +28,26 @@
     const [modalAbierto, setModalAbierto] = useState(false);
     const [titulo, setTitulo] = useState("");
     const [descripcion, setDescripcion] = useState("");
+    const [fechaEntrega, setFechaEntrega] = useState("");
     const [error, setError] = useState("");
+
+    // Recalcula estados cada minuto
+    useEffect(() => {
+        const interval = setInterval(() => {
+        setTareas((prev) =>
+            prev.map((t) => ({
+            ...t,
+            estado: calcularEstado(t.fechaEntrega),
+            }))
+        );
+        }, 60 * 1000);
+        return () => clearInterval(interval);
+    }, []);
 
     const abrirModal = () => {
         setTitulo("");
         setDescripcion("");
+        setFechaEntrega("");
         setError("");
         setModalAbierto(true);
     };
@@ -33,11 +63,15 @@
         return;
         }
 
+        const entrega = fechaEntrega ? new Date(fechaEntrega) : undefined;
+
         const nueva: Tarea = {
         id: crypto.randomUUID(),
         titulo: titulo.trim(),
         descripcion: descripcion.trim(),
         fechaHora: new Date(),
+        fechaEntrega: entrega,
+        estado: calcularEstado(entrega),
         };
 
         setTareas((prev) => [nueva, ...prev]);
@@ -63,9 +97,11 @@
         modalAbierto,
         titulo,
         descripcion,
+        fechaEntrega,
         error,
         setTitulo,
         setDescripcion,
+        setFechaEntrega,
         abrirModal,
         cerrarModal,
         crearTarea,
