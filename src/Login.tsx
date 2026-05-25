@@ -1,5 +1,6 @@
     import { useState } from "react";
-    import "./Login.css";
+    import { useNavigate } from "react-router-dom";
+    import "./styles/Login.css";
 
     interface LoginForm {
     email: string;
@@ -7,6 +8,7 @@
     }
 
     export default function Login() {
+    const navigate = useNavigate();
     const [form, setForm] = useState<LoginForm>({ email: "", password: "" });
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>("");
@@ -44,6 +46,11 @@
 
         setLoading(false);
         setSuccess(true);
+        
+        // Navega a TaskHome después de 1.5 segundos
+        setTimeout(() => {
+            navigate('/taskhome');
+        }, 1500);
     };
 
     return (

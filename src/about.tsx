@@ -1,6 +1,5 @@
-
-import  React from 'react';
-import './App.css';
+import React from 'react';
+import './styles/About.css';
 
 function About(): React.ReactElement {
     return (
@@ -38,5 +37,7 @@ function About(): React.ReactElement {
         </div>
     );
     }
+
+    
 
     export default About;

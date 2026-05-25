@@ -201,46 +201,6 @@
   }
 
 
-  /* STATS */
-  .stats {
-    display: flex;
-    justify-content: center;
-    gap: 3rem;
-    padding: 3rem 2rem;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    background: var(--surface);
-    flex-wrap: wrap;
-  }
-
-  .stat {
-    text-align: center;
-    animation: fadeUp 0.6s ease both;
-  }
-
-  .stat-number {
-    font-family: 'Syne', sans-serif;
-    font-size: 2.2rem;
-    font-weight: 800;
-    color: var(--text);
-    letter-spacing: -1px;
-  }
-
-  .stat-label {
-    font-size: 0.8rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-top: 0.25rem;
-  }
-
-  /* FEATURES */
-  .features {
-    padding: 6rem 2rem;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
   .section-label {
     font-size: 0.78rem;
     font-weight: 600;
@@ -261,73 +221,6 @@
     color: var(--text);
   }
 
-  .cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-  }
-
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 2rem;
-    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
-    cursor: default;
-    animation: fadeUp 0.6s ease both;
-  }
-
-  .card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(108, 99, 255, 0.5);
-    box-shadow: 0 16px 40px rgba(0,0,0,0.4);
-  }
-
-  .card-icon {
-    font-size: 2rem;
-    margin-bottom: 1.2rem;
-    display: block;
-  }
-
-  .card h3 {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 0.6rem;
-    color: var(--text);
-  }
-
-  .card p {
-    font-size: 0.9rem;
-    color: var(--muted);
-    line-height: 1.65;
-  }
-
-  /* CTA SECTION */
-  .cta-section {
-    margin: 2rem auto 6rem;
-    max-width: 700px;
-    text-align: center;
-    padding: 3.5rem 2.5rem;
-    background: linear-gradient(135deg, rgba(108,99,255,0.1), rgba(255,101,132,0.07));
-    border: 1px solid var(--border);
-    border-radius: 20px;
-  }
-
-  .cta-section h2 {
-    font-family: 'Syne', sans-serif;
-    font-size: 2rem;
-    font-weight: 800;
-    letter-spacing: -0.5px;
-    margin-bottom: 1rem;
-  }
-
-  .cta-section p {
-    color: var(--muted);
-    margin-bottom: 2rem;
-    font-size: 0.95rem;
-    line-height: 1.65;
-  }
 
   /* FOOTER */
   footer {
@@ -351,80 +244,6 @@
   justify-content: space-between;
   width: 100%;
 }
-
-  /* ABOUT PAGE */
-  .about-page {
-    min-height: 100vh;
-    padding: 8rem 2rem 4rem;
-    background: var(--bg);
-  }
-
-  .about-container {
-    max-width: 900px;
-    margin: 0 auto;
-    animation: fadeUp 0.6s ease both;
-  }
-
-  .about-page h1 {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(2.2rem, 6vw, 3.5rem);
-    font-weight: 800;
-    letter-spacing: -1.5px;
-    margin-bottom: 1.5rem;
-    color: var(--text);
-  }
-
-  .about-page h1 span {
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .about-intro {
-    font-size: 1.2rem;
-    color: var(--muted);
-    line-height: 1.8;
-    margin-bottom: 3rem;
-    font-weight: 300;
-  }
-
-  .about-section {
-    margin-bottom: 3rem;
-    padding: 2rem;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    animation: fadeUp 0.6s ease both;
-  }
-
-  .about-section:nth-child(2) {
-    animation-delay: 0.1s;
-  }
-
-  .about-section:nth-child(3) {
-    animation-delay: 0.2s;
-  }
-
-  .about-section:nth-child(4) {
-    animation-delay: 0.3s;
-  }
-
-  .about-section h2 {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: var(--text);
-    letter-spacing: -0.5px;
-  }
-
-  .about-section p {
-    font-size: 1rem;
-    color: var(--muted);
-    line-height: 1.8;
-    font-weight: 300;
-  }
 
   /* ANIMATION */
   @keyframes fadeUp {
@@ -463,9 +282,6 @@
       font-size: 1rem;
     }
 
-    .card h3 {
-      font-size: 1rem;
-    }
   }
 
   @media (max-width: 768px) {
@@ -510,55 +326,6 @@
       padding: 0.7rem 1.5rem;
       font-size: 0.85rem;
     }
-
-    .cta-section {
-      padding: 2rem 1.5rem;
-      margin-bottom: 4rem;
-    }
-
-    .cta-section h2 {
-      font-size: 1.5rem;
-    }
-
-    .cta-section p {
-      font-size: 0.9rem;
-    }
-
-    .card h3 {
-      font-size: 0.95rem;
-    }
-
-    .card p {
-      font-size: 0.85rem;
-    }
-
-    .about-page {
-      padding: 7rem 1.5rem 3rem;
-    }
-
-    .about-page h1 {
-      font-size: clamp(1.8rem, 5vw, 2.8rem);
-      margin-bottom: 1.3rem;
-    }
-
-    .about-intro {
-      font-size: 1rem;
-      margin-bottom: 2.5rem;
-    }
-
-    .about-section {
-      padding: 1.8rem;
-      margin-bottom: 2.5rem;
-    }
-
-    .about-section h2 {
-      font-size: 1.5rem;
-      margin-bottom: 0.9rem;
-    }
-
-    .about-section p {
-      font-size: 0.95rem;
-    }
   }
 
   @media (max-width: 480px) {
@@ -576,11 +343,6 @@
 
     .nav-links a {
       font-size: 0.7rem;
-    }
-
-    .nav-cta {
-      padding: 0.4rem 0.8rem;
-      font-size: 0.7rem !important;
     }
 
     h2 {
@@ -608,72 +370,6 @@
       width: 100%;
       padding: 0.6rem 1rem;
       font-size: 0.8rem;
-    }
-
-    .cta-section {
-      padding: 1.5rem 1rem;
-      margin: 1rem auto 3rem;
-      border-radius: 12px;
-    }
-
-    .cta-section h2 {
-      font-size: 1.2rem;
-      margin-bottom: 0.8rem;
-    }
-
-    .cta-section p {
-      font-size: 0.85rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .cards {
-      gap: 1rem;
-    }
-
-    .card {
-      padding: 1.5rem;
-    }
-
-    .card h3 {
-      font-size: 0.85rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .card p {
-      font-size: 0.75rem;
-    }
-
-    .card-icon {
-      font-size: 1.5rem;
-      margin-bottom: 0.8rem;
-    }
-
-    .about-page {
-      padding: 6rem 1rem 2rem;
-    }
-
-    .about-page h1 {
-      font-size: clamp(1.6rem, 5vw, 2.5rem);
-      margin-bottom: 1.2rem;
-    }
-
-    .about-intro {
-      font-size: 0.95rem;
-      margin-bottom: 2rem;
-    }
-
-    .about-section {
-      padding: 1.5rem;
-      margin-bottom: 2rem;
-    }
-
-    .about-section h2 {
-      font-size: 1.3rem;
-      margin-bottom: 0.8rem;
-    }
-
-    .about-section p {
-      font-size: 0.9rem;
     }
   }
 
