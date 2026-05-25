@@ -1,3 +1,4 @@
+/* src/tareas.css */
 :root {
   --bg: #0a0a0f;
   --surface: #111118;
@@ -19,13 +20,22 @@
   margin: 0 auto;
 }
 
+.tareas-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
 .tareas-page h1 {
   font-family: 'Syne', sans-serif;
   font-size: clamp(2.2rem, 6vw, 3.5rem);
   font-weight: 800;
   letter-spacing: -1.5px;
-  margin-bottom: 1.5rem;
   color: var(--text);
+  margin: 0;
 }
 
 .tareas-page h1 span {
@@ -35,11 +45,273 @@
   background-clip: text;
 }
 
-.tareas-page p {
+.btn-nueva-tarea {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: transform 0.2s, box-shadow 0.2s;
+  white-space: nowrap;
+}
+
+.btn-nueva-tarea:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(108, 99, 255, 0.4);
+}
+
+.tareas-empty {
   font-size: 1.1rem;
   color: var(--muted);
-  line-height: 1.6;
   font-weight: 300;
+  line-height: 1.6;
+}
+
+/* LISTA DE TAREAS */
+.tareas-lista {
+  display: grid;
+  gap: 1.2rem;
+}
+
+.tarea-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  animation: fadeUp 0.4s ease both;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.tarea-card:hover {
+  border-color: rgba(108, 99, 255, 0.5);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.tarea-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.tarea-titulo {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+
+.tarea-fecha {
+  font-size: 0.78rem;
+  color: var(--muted);
+  white-space: nowrap;
+  margin-top: 0.2rem;
+  flex-shrink: 0;
+}
+
+.tarea-descripcion {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.65;
+  margin: 0 0 1.2rem;
+  font-weight: 300;
+}
+
+.tarea-card-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-finalizar {
+  background: transparent;
+  border: 1px solid rgba(108, 99, 255, 0.4);
+  color: var(--accent);
+  padding: 0.45rem 1.1rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.btn-finalizar:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+/* MODAL */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(6px);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  animation: fadeIn 0.2s ease;
+}
+
+.modal {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 500px;
+  animation: fadeUp 0.3s ease;
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2rem 1rem;
+}
+
+.modal-header h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.5px;
+  margin: 0;
+}
+
+.modal-header h2 span {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.modal-close:hover {
+  color: var(--text);
+}
+
+.modal-body {
+  padding: 0.5rem 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.field label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: 0.3px;
+}
+
+.field input,
+.field textarea {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.95rem;
+  outline: none;
+  resize: none;
+  transition: border-color 0.2s;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: var(--muted);
+}
+
+.field input:focus,
+.field textarea:focus {
+  border-color: var(--accent);
+}
+
+.modal-error {
+  color: var(--accent2);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.modal-footer {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  padding: 1rem 2rem 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.btn-cancelar {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  padding: 0.65rem 1.3rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.btn-cancelar:hover {
+  border-color: var(--muted);
+  color: var(--text);
+}
+
+.btn-crear {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 0.65rem 1.5rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-crear:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(108, 99, 255, 0.4);
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 /* RESPONSIVE */
@@ -47,10 +319,8 @@
   .tareas-page {
     padding: 7rem 1.5rem 3rem;
   }
-
   .tareas-page h1 {
     font-size: clamp(1.8rem, 5vw, 2.8rem);
-    margin-bottom: 1.3rem;
   }
 }
 
@@ -58,13 +328,21 @@
   .tareas-page {
     padding: 6.5rem 1.2rem 2.5rem;
   }
-
   .tareas-page h1 {
     font-size: clamp(1.6rem, 5vw, 2.4rem);
   }
-
-  .tareas-page p {
-    font-size: 1rem;
+  .tarea-card {
+    padding: 1.2rem 1.5rem;
+  }
+  .tarea-card-header {
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .modal-header,
+  .modal-body,
+  .modal-footer {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 }
 
@@ -72,13 +350,35 @@
   .tareas-page {
     padding: 6rem 1rem 2rem;
   }
-
   .tareas-page h1 {
     font-size: clamp(1.4rem, 5vw, 2rem);
-    margin-bottom: 1rem;
   }
-
-  .tareas-page p {
-    font-size: 0.95rem;
+  .tareas-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .btn-nueva-tarea {
+    width: 100%;
+    text-align: center;
+  }
+  .tarea-card {
+    padding: 1rem 1.2rem;
+  }
+  .modal {
+    border-radius: 12px;
+  }
+  .modal-header,
+  .modal-body,
+  .modal-footer {
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+  }
+  .modal-footer {
+    flex-direction: column;
+  }
+  .btn-cancelar,
+  .btn-crear {
+    width: 100%;
+    text-align: center;
   }
 }
