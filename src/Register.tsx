@@ -1,4 +1,6 @@
     import { useState } from "react";
+    import { useNavigate } from "react-router-dom";
+    import { useAuth } from "./Routes/UseAuth";
     import "./Register.css";
 
     interface RegisterForm {
@@ -60,6 +62,9 @@
     }
 
     export default function Register() {
+        const { login } = useAuth();
+        const navigate = useNavigate();
+
     const [form, setForm] = useState<RegisterForm>({
         nombre: "",
         apellido: "",
@@ -109,12 +114,14 @@
         if (!isFormValid) return;
 
         // TODO: llamar a tu API de registro aquí
-        console.log("Registro:", {
+        login({
         nombre: form.nombre.trim(),
         apellido: form.apellido.trim(),
         edad: Number(form.edad),
         correo: form.correo.trim(),
-        });
+        }, form.password);
+        localStorage.setItem("userToken", "logged");
+        navigate("/taskhome");
     };
 
     const passwordsMatch =

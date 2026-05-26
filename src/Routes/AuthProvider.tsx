@@ -13,14 +13,25 @@
         }
     });
 
-    const login = (userData: User) => {
+    const login = (userData: User, password?: string) => {
         setUser(userData);
         localStorage.setItem("auth_user", JSON.stringify(userData));
+
+        // Guarda el usuario en la lista de usuarios registrados
+    if (password) {
+        const usuarios = JSON.parse(localStorage.getItem("usuarios_registrados") || "[]");
+        const yaExiste = usuarios.find((u: User & { password: string }) => u.correo === userData.correo);
+        if (!yaExiste) {
+            usuarios.push({ ...userData, password });
+            localStorage.setItem("usuarios_registrados", JSON.stringify(usuarios));
+        }
+    }
     };
 
     const logout = () => {
         setUser(null);
-        localStorage.removeItem("auth_user");
+        localStorage.removeItem("auth_user"); 
+        
     };
 
     return (

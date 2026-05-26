@@ -2,13 +2,15 @@
 
     export interface User {
     nombre: string;
+    apellido: string;
+    edad: number;
     correo: string;
     }
 
     export interface AuthContextType {
     user: User | null;
     isAuthenticated: boolean;
-    login: (userData: User) => void;
+    login: (userData: User, password?: string) => void;
     logout: () => void;
     }
 

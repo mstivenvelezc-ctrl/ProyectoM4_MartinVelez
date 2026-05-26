@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { useTareas } from "./useTareas";
 import TaskCalendar from "./TaskCalendar";
+import UserCard from "./UserCard";
 import './TaskHome.css';
 
 
@@ -25,6 +26,14 @@ function TaskHome() {
             Gestiona tus tareas de forma rápida y eficiente
           </p>
           <div className="hero-actions" />
+        </div>
+      </section>
+
+       {/* Card del usuario */}
+      <section className="user-section">
+        <h2 className="user-section-title">Mi <span>Perfil</span></h2>
+        <div className="user-section-content">
+          <UserCard />
         </div>
       </section>
 
