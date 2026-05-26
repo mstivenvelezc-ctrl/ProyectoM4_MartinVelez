@@ -2,6 +2,7 @@
 import { Link, Routes, Route, useNavigate } from 'react-router-dom';
 import TaskHome from '../TaskHome';
 import Tareas from '../tareas';
+import Register from "../Register";
 
 export default function TaskRouter() {
   const navigate = useNavigate();
@@ -35,6 +36,7 @@ export default function TaskRouter() {
       <Routes>
         <Route index element={<TaskHome />} />
         <Route path="tareas" element={<Tareas />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </div>
   );

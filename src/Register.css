@@ -1,0 +1,205 @@
+    /* Register.css — mismo estilo que Login */
+
+    .register-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #0d0d1a;
+    padding: 2rem 1rem;
+    }
+
+    .register-card {
+    background: #1a1a2e;
+    border-radius: 18px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 380px;
+    }
+
+    /* Logo */
+    .register-logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.2rem;
+    }
+
+    .register-logo svg {
+    width: 70px;
+    height: 70px;
+    }
+
+    /* Título */
+    .register-title {
+    font-family: "Nunito", sans-serif;
+    font-weight: 800;
+    font-size: 2rem;
+    color: #ffffff;
+    margin: 0 0 0.2rem;
+    line-height: 1.1;
+    }
+
+    .register-title span {
+    color: #b06bef;
+    }
+
+    .register-subtitle {
+    font-size: 0.82rem;
+    color: #888;
+    margin: 0 0 1.4rem;
+    }
+
+    /* Fila de dos columnas */
+    .register-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    }
+
+    /* Campo */
+    .register-field {
+    margin-bottom: 0.9rem;
+    }
+
+    .register-label {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #aaa;
+    margin-bottom: 0.35rem;
+    }
+
+    /* Input wrap */
+    .register-input-wrap {
+    display: flex;
+    align-items: center;
+    background: #0f0f1e;
+    border: 1.5px solid #2a2a4a;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+    }
+
+    .register-input-wrap:focus-within {
+    border-color: #7c4dff;
+    }
+
+    .register-icon {
+    padding: 0 10px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    color: #666;
+    }
+
+    .register-input-wrap input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #eee;
+    font-size: 0.88rem;
+    padding: 11px 10px 11px 0;
+    font-family: inherit;
+    width: 0; /* evita desborde en grid */
+    }
+
+    .register-input-wrap input::placeholder {
+    color: #444;
+    }
+
+    /* Quitar flechas en input number */
+    .register-input-wrap input[type="number"]::-webkit-inner-spin-button,
+    .register-input-wrap input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    }
+
+    .register-eye {
+    padding: 0 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    color: #666;
+    transition: color 0.2s;
+    }
+
+    .register-eye:hover {
+    color: #b06bef;
+    }
+
+    /* Hints y validaciones */
+    .register-hint {
+    font-size: 0.7rem;
+    color: #666;
+    margin: 4px 0 0;
+    }
+
+    .register-match {
+    font-size: 0.7rem;
+    margin: 4px 0 0;
+    }
+
+    .register-match.ok {
+    color: #4ade80;
+    }
+
+    .register-match.no {
+    color: #f87171;
+    }
+
+    /* Botón principal */
+    .register-btn {
+    width: 100%;
+    background: linear-gradient(90deg, #7c4dff, #c850c0);
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-family: "Nunito", sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 13px;
+    cursor: pointer;
+    margin-top: 1.1rem;
+    transition: opacity 0.2s, transform 0.1s;
+    letter-spacing: 0.01em;
+    }
+
+    .register-btn:hover {
+    opacity: 0.9;
+    }
+
+    .register-btn:active {
+    transform: scale(0.98);
+    }
+
+    /* Divider */
+    .register-divider {
+    text-align: center;
+    color: #444;
+    font-size: 0.8rem;
+    margin: 1rem 0 0.6rem;
+    position: relative;
+    }
+
+    /* Link a login */
+    .register-login {
+    text-align: center;
+    font-size: 0.82rem;
+    color: #888;
+    margin: 0;
+    }
+
+    .register-login a {
+    color: #9b6dff;
+    font-weight: 600;
+    text-decoration: none;
+    }
+
+    .register-login a:hover {
+    text-decoration: underline;
+    }

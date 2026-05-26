@@ -1,8 +1,10 @@
 import { Link, Routes, Route } from 'react-router-dom';
+
 import App from '../App';
 import Login from '../Login';
 import About from '../about';
 import TaskRouter from './TaskRouter';
+import Register from '../Register';
 import '../App.css';
 
 export default function AppRouter() {
@@ -23,6 +25,7 @@ export default function AppRouter() {
         <Route path="/" element={<App />} />
         <Route path="/login" element={<Login />} />
         <Route path="/about" element={<About />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/taskhome/*" element={<TaskRouter />} />
       </Routes>
     </div>

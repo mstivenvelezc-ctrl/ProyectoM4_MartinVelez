@@ -39,8 +39,8 @@
             return;
         }
 
-        if (form.password.length < 6) {
-            setError("La contraseña debe tener al menos 6 caracteres.");
+        if (form.password.length < 8) {
+            setError("La contraseña debe tener al menos 8 caracteres.");
             return;
         }
 
@@ -137,7 +137,7 @@
 
                 <p className="register-link">
                 ¿No tienes cuenta?{" "}
-                <a href="#">Regístrate gratis</a>
+                <a href="#" onClick={e => { e.preventDefault(); navigate('/register'); }}>Regístrate gratis</a>
                 </p>
 
             </form>
