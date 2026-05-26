@@ -17,7 +17,7 @@ export default function TaskRouter() {
         <div className="nav-inner">
           <div className="nav-logo">My<span>Task</span></div>
           <ul className="nav-links">
-            <li><Link to="/taskhome">Home</Link></li>
+            <li><Link to="/taskhome">Inicio</Link></li>
             <li><Link to="/taskhome/tareas">Tareas</Link></li>
             <li>
               <button
@@ -25,7 +25,7 @@ export default function TaskRouter() {
                 onClick={handleLogout}
                 style={{ background: 'none', border: 'none', color: 'var(--text)', cursor: 'pointer', fontSize: '1rem' }}
               >
-                Logout
+                Salir ↰
               </button>
             </li>
           </ul>

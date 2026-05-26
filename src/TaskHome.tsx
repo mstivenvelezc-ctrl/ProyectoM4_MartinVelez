@@ -1,7 +1,12 @@
+
 import { useEffect } from "react";
+import { useTareas } from "./useTareas";
+import TaskCalendar from "./TaskCalendar";
 import './TaskHome.css';
 
+
 function TaskHome() {
+  const { tareas } = useTareas();
   useEffect(() => {
     document.title = "MyTask - Dashboard";
   }, []);
@@ -19,9 +24,13 @@ function TaskHome() {
           <p className="hero-sub">
             Gestiona tus tareas de forma rápida y eficiente
           </p>
-          <div className="hero-actions">
-          </div>
+          <div className="hero-actions" />
         </div>
+      </section>
+
+      <section className="calendar-section">
+        <h2 className="calendar-title-main">Calendario de Tareas</h2>
+        <TaskCalendar tareas={tareas} />
       </section>
 
       {/* FOOTER */}

@@ -163,6 +163,12 @@
   animation: pulse 2s infinite;
 }
 
+.badge-completada {
+  background: rgba(50, 200, 120, 0.15);
+  color: #32c878;
+  border: 1px solid rgba(50, 200, 120, 0.4);
+}
+
 .badge-perdida {
   background: rgba(180, 30, 30, 0.2);
   color: #e05555;
@@ -203,6 +209,16 @@
   font-weight: 500;
 }
 
+.tarea-card--completada {
+  border-color: rgba(50, 200, 120, 0.5);
+  background: rgba(50, 200, 120, 0.06);
+}
+
+.tarea-card--completada:hover {
+  border-color: rgba(50, 200, 120, 0.8);
+  box-shadow: 0 8px 32px rgba(50, 200, 120, 0.15);
+}
+
 .tarea-card-footer {
   display: flex;
   justify-content: flex-end;
@@ -213,6 +229,7 @@
   border: 1px solid rgba(108, 99, 255, 0.4);
   color: var(--accent);
   padding: 0.45rem 1.1rem;
+  margin: auto;
   border-radius: 6px;
   font-size: 0.85rem;
   font-weight: 600;
@@ -381,6 +398,7 @@
   border: 1px solid var(--border);
   color: var(--muted);
   padding: 0.65rem 1.3rem;
+  margin: auto;
   border-radius: 8px;
   font-size: 0.9rem;
   font-weight: 500;
@@ -392,6 +410,43 @@
 .btn-cancelar:hover {
   border-color: var(--muted);
   color: var(--text);
+}
+
+.btn-completar {
+  background: transparent;
+  border: 1px solid rgba(108, 99, 255, 0.4);
+  color: var(--muted);
+  padding: 0.45rem 1.1rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.btn-completar:hover {
+  background: rgba(108, 99, 255, 0.15);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn-completada {
+  background: rgba(109, 248, 63, 0.2);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 0.45rem 1.1rem;
+  margin: auto;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.btn-completada:hover {
+  background: rgba(109, 248, 63, 0.2);
 }
 
 .btn-crear {

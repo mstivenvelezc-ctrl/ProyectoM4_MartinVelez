@@ -88,14 +88,14 @@ nav {
 
 /* HERO */
 .hero {
-  min-height: 100vh;
+  min-height: 50vh;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 6rem 2rem 4rem;
+  padding: 6rem 2rem 0.5rem;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .hero-glow {
@@ -112,8 +112,11 @@ nav {
 
 .hero-content {
   position: relative;
-  max-width: 780px;
+  max-width: 200px;
   animation: fadeUp 0.8s ease both;
+  flex: 1;
+  max-width: 1200px; /* límite máximo */
+  margin: 0 auto;    /* centra horizontalmente */
 }
 
 h1 {
@@ -206,6 +209,11 @@ footer span {
   .hero-sub {
     font-size: 1rem;
   }
+
+  .hero-content {
+    font-size: 1.3rem;
+  }
+
 }
 
 @media (max-width: 768px) {

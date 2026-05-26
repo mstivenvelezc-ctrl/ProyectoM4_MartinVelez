@@ -48,9 +48,9 @@ function HomePage() {
 
   return (
     <>
-      <section className="hero">
-        <div className="hero-glow" />
-        <div className="hero-content">
+      <section className="heroH">
+        <div className="heroH-glow" />
+        <div className="heroH-content">
           <img src="/logo.png" alt="MyTask Logo" className="card-logo" />
           <h1>My<span>Task</span></h1>
           <h2>

@@ -105,7 +105,7 @@
   }
 
   /* HERO */
-  .hero {
+  .heroH {
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -116,7 +116,7 @@
     overflow: hidden;
   }
 
-  .hero-glow {
+  .heroH-glow {
     position: absolute;
     width: 600px;
     height: 600px;
@@ -128,13 +128,13 @@
     pointer-events: none;
   }
 
-  .hero-content {
+  .heroH-content {
     position: relative;
     max-width: 780px;
     animation: fadeUp 0.8s ease both;
   }
 
-  .hero-tag {
+  .heroH-tag {
     display: inline-block;
     background: rgba(108, 99, 255, 0.12);
     border: 1px solid var(--border);
@@ -172,7 +172,7 @@
     background-clip: text;
   }
 
-  .hero-sub {
+  .heroH-sub {
     font-size: 1.1rem;
     color: var(--muted);
     line-height: 1.7;
@@ -181,7 +181,7 @@
     font-weight: 300;
   }
 
-  .hero-actions {
+  .heroH-actions {
     display: flex;
     gap: 1rem;
     justify-content: center;
@@ -466,7 +466,7 @@
       font-size: clamp(1.8rem, 5vw, 4rem);
     }
 
-    .hero-sub {
+    .heroH-sub {
       font-size: 1rem;
     }
 
@@ -497,18 +497,18 @@
       margin-bottom: 1rem;
     }
 
-    .hero-sub {
+    .heroH-sub {
       font-size: 0.95rem;
       max-width: 100%;
     }
 
-    .hero-tag {
+    .heroH-tag {
       font-size: 0.7rem;
       padding: 0.3rem 0.8rem;
       margin-bottom: 1.5rem;
     }
 
-    .hero-actions {
+    .heroH-actions {
       gap: 0.8rem;
     }
 
@@ -596,17 +596,17 @@
       letter-spacing: -1px;
     }
 
-    .hero-sub {
+    .heroH-sub {
       font-size: 0.85rem;
       line-height: 1.6;
     }
 
-    .hero-tag {
+    .heroH-tag {
       font-size: 0.65rem;
       padding: 0.25rem 0.6rem;
     }
 
-    .hero-actions {
+    .heroH-actions {
       flex-direction: column;
       gap: 0.6rem;
     }

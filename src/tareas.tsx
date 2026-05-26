@@ -20,6 +20,7 @@ function Tareas() {
     crearTarea,
     eliminarTarea,
     formatearFecha,
+    completarTarea,
   } = useTareas();
 
   useEffect(() => {
@@ -27,6 +28,7 @@ function Tareas() {
   }, []);
 
   const etiquetaEstado = (tarea: Tarea) => {
+    if (tarea.estado === "completada") return <span className="badge badge-completada">✓ Completada</span>;
     if (tarea.estado === "prioridad") return <span className="badge badge-prioridad">⚠ Prioridad</span>;
     if (tarea.estado === "perdida") return <span className="badge badge-perdida">✕ Tarea Perdida</span>;
     return <span className="badge badge-normal">● Activa</span>;
@@ -69,6 +71,13 @@ function Tareas() {
                   )}
 
                   <div className="tarea-card-footer">
+                      <button
+                        onClick={() => completarTarea(tarea.id)}
+                        className={tarea.completada ? "btn-completada" : "btn-completar"}
+                      >
+                        {tarea.completada ? "✅ Completada" : "Marcar como hecha"}
+                      </button>
+
                     {tarea.estado === "perdida" ? (
                       <button className="btn-eliminar" onClick={() => eliminarTarea(tarea.id)}>
                         ✕ Eliminar
