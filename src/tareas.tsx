@@ -2,9 +2,11 @@
 import { useEffect } from "react";
 import { useTareas } from "./useTareas";
 import type { Tarea } from "./useTareas";
+import { useAuth } from "./Routes/UseAuth";
 import './tareas.css';
 
 function Tareas() {
+  const { user } = useAuth(); 
   const {
     tareas,
     modalAbierto,
@@ -21,7 +23,7 @@ function Tareas() {
     eliminarTarea,
     formatearFecha,
     completarTarea,
-  } = useTareas();
+  } = useTareas(user?.correo ?? "");
 
   useEffect(() => {
     document.title = "MyTask - Tareas";

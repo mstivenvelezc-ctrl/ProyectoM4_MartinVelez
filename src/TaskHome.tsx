@@ -1,13 +1,15 @@
 
 import { useEffect } from "react";
 import { useTareas } from "./useTareas";
+import { useAuth } from "./Routes/UseAuth";
 import TaskCalendar from "./TaskCalendar";
 import UserCard from "./UserCard";
 import './TaskHome.css';
 
 
 function TaskHome() {
-  const { tareas } = useTareas();
+  const { user } = useAuth();
+  const { tareas } = useTareas(user?.correo ?? "");
   useEffect(() => {
     document.title = "MyTask - Dashboard";
   }, []);

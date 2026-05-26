@@ -13,7 +13,9 @@
     completada: boolean;
     }
 
-    const STORAGE_KEY = "mytask_tareas";
+    function getStorageKey(correo: string) {
+    return `mytask_tareas_${correo}`;
+    }
 
     function calcularEstado(fechaEntrega?: Date): EstadoTarea {
     if (!fechaEntrega) return "normal";
@@ -25,10 +27,9 @@
     return "normal";
     }
 
-    // Carga desde localStorage y convierte fechas de string a Date
-    function cargarTareas(): Tarea[] {
+    function cargarTareas(key: string): Tarea[] {
     try {
-        const raw = localStorage.getItem(STORAGE_KEY);
+        const raw = localStorage.getItem(key);
         if (!raw) return [];
         const parsed = JSON.parse(raw);
         return parsed.map((t: Tarea) => ({
@@ -36,34 +37,40 @@
         fechaHora: new Date(t.fechaHora),
         fechaEntrega: t.fechaEntrega ? new Date(t.fechaEntrega) : undefined,
         completada: t.completada ?? false,
-
-        // Si ya está completada, mantener ese estado; si no, recalcular
-        estado: t.estado === "completada" 
-        ? "completada" 
-        : calcularEstado(t.fechaEntrega ? new Date(t.fechaEntrega) : undefined), 
+        estado: t.estado === "completada"
+            ? "completada"
+            : calcularEstado(t.fechaEntrega ? new Date(t.fechaEntrega) : undefined),
         }));
     } catch {
         return [];
     }
     }
 
-    function guardarTareas(tareas: Tarea[]) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(tareas));
+    function guardarTareas(key: string, tareas: Tarea[]) {
+    localStorage.setItem(key, JSON.stringify(tareas));
     }
 
-    export function useTareas() {
-    const [tareas, setTareas] = useState<Tarea[]>(cargarTareas);
+    export function useTareas(correo: string) {
+    const key = getStorageKey(correo);
+
+    const [tareas, setTareas] = useState<Tarea[]>(() => cargarTareas(key));
     const [modalAbierto, setModalAbierto] = useState(false);
     const [titulo, setTitulo] = useState("");
     const [descripcion, setDescripcion] = useState("");
     const [fechaEntrega, setFechaEntrega] = useState("");
     const [error, setError] = useState("");
-    
+
+    // Recarga tareas cuando cambia el usuario
+    const [currentKey, setCurrentKey] = useState(key);
+    if (key !== currentKey) {
+        setCurrentKey(key);
+        setTareas(cargarTareas(key));
+        }
 
     // Guarda en localStorage cada vez que cambian las tareas
     useEffect(() => {
-        guardarTareas(tareas);
-    }, [tareas]);
+        guardarTareas(key, tareas);
+    }, [tareas, key]);
 
     // Recalcula estados cada minuto
     useEffect(() => {
@@ -72,8 +79,8 @@
             prev.map((t) => ({
             ...t,
             estado: t.estado === "completada"
-            ? "completada"
-            : calcularEstado(t.fechaEntrega),
+                ? "completada"
+                : calcularEstado(t.fechaEntrega),
             }))
         );
         }, 60 * 1000);
@@ -100,9 +107,10 @@
     };
 
     const completarTarea = (id: string) => {
-        if (window.confirm("Una vez colmpletada la tarea no se puede desdmarcar")) {
-        setTareas((prev) => prev.map((t) => t.id === id ? { ...t, completada: true, estado: "completada" } : t
-        ));
+        if (window.confirm("Una vez completada la tarea no se puede desmarcar")) {
+        setTareas((prev) =>
+            prev.map((t) => t.id === id ? { ...t, completada: true, estado: "completada" } : t)
+        );
         }
     };
 
@@ -181,8 +189,7 @@
         cerrarModal,
         crearTarea,
         eliminarTarea,
-        completada: false,
-        formatearFecha,
         completarTarea,
+        formatearFecha,
     };
     }
