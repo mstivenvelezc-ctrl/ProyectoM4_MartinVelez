@@ -10,6 +10,55 @@
     confirmPassword: string;
     }
 
+    type FormErrors = Partial<Record<keyof RegisterForm, string>>;
+    type TouchedFields = Partial<Record<keyof RegisterForm, boolean>>;
+
+    // ── Reglas de validación ──────────────────────────────────────────────────────
+    function validate(form: RegisterForm): FormErrors {
+    const errors: FormErrors = {};
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!form.nombre.trim()) {
+        errors.nombre = "El nombre es obligatorio.";
+    } else if (form.nombre.trim().length < 3) {
+        errors.nombre = "Mínimo 3 caracteres.";
+    }
+
+    if (!form.apellido.trim()) {
+        errors.apellido = "El apellido es obligatorio.";
+    } else if (form.apellido.trim().length < 3) {
+        errors.apellido = "Mínimo 3 caracteres.";
+    }
+
+    if (!form.edad) {
+        errors.edad = "La edad es obligatoria.";
+    } else if (Number(form.edad) < 18) {
+        errors.edad = "Debes tener al menos 18 años.";
+    } else if (Number(form.edad) > 120) {
+        errors.edad = "Edad inválida.";
+    }
+
+    if (!form.correo.trim()) {
+        errors.correo = "El correo es obligatorio.";
+    } else if (!emailRegex.test(form.correo)) {
+        errors.correo = "Ingresa un correo válido (usuario@dominio.com).";
+    }
+
+    if (!form.password) {
+        errors.password = "La contraseña es obligatoria.";
+    } else if (form.password.length < 8) {
+        errors.password = "Mínimo 8 caracteres.";
+    }
+
+    if (!form.confirmPassword) {
+        errors.confirmPassword = "Confirma tu contraseña.";
+    } else if (form.password !== form.confirmPassword) {
+        errors.confirmPassword = "Las contraseñas no coinciden.";
+    }
+
+    return errors;
+    }
+
     export default function Register() {
     const [form, setForm] = useState<RegisterForm>({
         nombre: "",
@@ -20,56 +69,63 @@
         confirmPassword: "",
     });
 
+    const [touched, setTouched] = useState<TouchedFields>({});
     const [showPass, setShowPass] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
+
+    const errors = validate(form);
+    const isFormValid = Object.keys(errors).length === 0;
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
 
-    const passwordsMatch =
-        form.confirmPassword.length > 0 && form.password === form.confirmPassword;
-    const passwordsMismatch =
-        form.confirmPassword.length > 0 && form.password !== form.confirmPassword;
+    const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+        setTouched((prev) => ({ ...prev, [e.target.name]: true }));
+    };
+
+    // Muestra error solo si el campo fue tocado
+    const fieldError = (field: keyof RegisterForm) =>
+        touched[field] ? errors[field] : undefined;
+
+    // Estado del borde: error = rojo, válido = verde, neutro = default
+    const inputState = (field: keyof RegisterForm) => {
+        if (!touched[field]) return "";
+        return errors[field] ? "input-error" : "input-ok";
+    };
 
     const handleSubmit = () => {
-        const { nombre, apellido, edad, correo, password, confirmPassword } = form;
+        // Marcar todos como tocados para mostrar todos los errores
+        const allTouched: TouchedFields = {
+        nombre: true,
+        apellido: true,
+        edad: true,
+        correo: true,
+        password: true,
+        confirmPassword: true,
+        };
+        setTouched(allTouched);
 
-        if (!nombre || !apellido || !edad || !correo || !password || !confirmPassword) {
-        alert("Por favor completa todos los campos.");
-        return;
-        }
-        if (password !== confirmPassword) {
-        alert("Las contraseñas no coinciden.");
-        return;
-        }
-        if (password.length < 8) {
-        alert("La contraseña debe tener al menos 8 caracteres.");
-        return;
-        }
+        if (!isFormValid) return;
 
         // TODO: llamar a tu API de registro aquí
-        console.log("Registro:", { nombre, apellido, edad: Number(edad), correo });
+        console.log("Registro:", {
+        nombre: form.nombre.trim(),
+        apellido: form.apellido.trim(),
+        edad: Number(form.edad),
+        correo: form.correo.trim(),
+        });
     };
+
+    const passwordsMatch =
+        form.confirmPassword.length > 0 && form.password === form.confirmPassword;
 
     return (
         <div className="register-container">
         <div className="register-card">
             {/* Logo */}
             <div className="register-logo">
-            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="4" y="10" width="56" height="44" rx="6" fill="#2a1a4e" stroke="#7c4dff" strokeWidth="1.5" />
-                <path d="M32 10 C32 10 32 54 32 54" stroke="#7c4dff" strokeWidth="1.5" />
-                <line x1="14" y1="22" x2="28" y2="22" stroke="#c850c0" strokeWidth="2" strokeLinecap="round" />
-                <line x1="14" y1="29" x2="28" y2="29" stroke="#c850c0" strokeWidth="2" strokeLinecap="round" />
-                <line x1="14" y1="36" x2="24" y2="36" stroke="#c850c0" strokeWidth="2" strokeLinecap="round" />
-                <line x1="36" y1="22" x2="50" y2="22" stroke="#b06bef" strokeWidth="2" strokeLinecap="round" />
-                <line x1="36" y1="29" x2="50" y2="29" stroke="#b06bef" strokeWidth="2" strokeLinecap="round" />
-                <line x1="36" y1="36" x2="46" y2="36" stroke="#b06bef" strokeWidth="2" strokeLinecap="round" />
-                <circle cx="50" cy="46" r="8" fill="#1a1a2e" stroke="#7c4dff" strokeWidth="1.5" />
-                <line x1="50" y1="42" x2="50" y2="50" stroke="#c850c0" strokeWidth="2" strokeLinecap="round" />
-                <line x1="46" y1="46" x2="54" y2="46" stroke="#c850c0" strokeWidth="2" strokeLinecap="round" />
-            </svg>
+            <img src="/logo.png" alt="MyTask Logo" className="card-logo" />
             </div>
 
             <h1 className="register-title">
@@ -81,77 +137,95 @@
             <div className="register-row">
             <div className="register-field">
                 <label className="register-label">Nombre</label>
-                <div className="register-input-wrap">
+                <div className={`register-input-wrap ${inputState("nombre")}`}>
                 <span className="register-icon">👤</span>
                 <input
                     type="text"
                     name="nombre"
                     value={form.nombre}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                     placeholder="Ana"
                     autoComplete="off"
                 />
                 </div>
+                {fieldError("nombre") && (
+                <p className="register-error">{fieldError("nombre")}</p>
+                )}
             </div>
+
             <div className="register-field">
                 <label className="register-label">Apellido</label>
-                <div className="register-input-wrap">
+                <div className={`register-input-wrap ${inputState("apellido")}`}>
                 <span className="register-icon">👤</span>
                 <input
                     type="text"
                     name="apellido"
                     value={form.apellido}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                     placeholder="García"
                     autoComplete="off"
                 />
                 </div>
+                {fieldError("apellido") && (
+                <p className="register-error">{fieldError("apellido")}</p>
+                )}
             </div>
             </div>
 
             {/* Edad */}
             <div className="register-field">
             <label className="register-label">Edad</label>
-            <div className="register-input-wrap">
+            <div className={`register-input-wrap ${inputState("edad")}`}>
                 <span className="register-icon">📅</span>
                 <input
                 type="number"
                 name="edad"
                 value={form.edad}
                 onChange={handleChange}
+                onBlur={handleBlur}
                 placeholder="25"
                 min={1}
                 max={120}
                 />
             </div>
+            {fieldError("edad") && (
+                <p className="register-error">{fieldError("edad")}</p>
+            )}
             </div>
 
             {/* Correo */}
             <div className="register-field">
             <label className="register-label">Correo Electrónico</label>
-            <div className="register-input-wrap">
+            <div className={`register-input-wrap ${inputState("correo")}`}>
                 <span className="register-icon">✉️</span>
                 <input
                 type="email"
                 name="correo"
                 value={form.correo}
                 onChange={handleChange}
+                onBlur={handleBlur}
                 placeholder="tucorreo@email.com"
                 autoComplete="off"
                 />
             </div>
+            {fieldError("correo") && (
+                <p className="register-error">{fieldError("correo")}</p>
+            )}
             </div>
 
             {/* Contraseña */}
             <div className="register-field">
             <label className="register-label">Contraseña</label>
-            <div className="register-input-wrap">
+            <div className={`register-input-wrap ${inputState("password")}`}>
                 <span className="register-icon">🔒</span>
                 <input
                 type={showPass ? "text" : "password"}
                 name="password"
                 value={form.password}
                 onChange={handleChange}
+                onBlur={handleBlur}
                 placeholder="••••••••"
                 autoComplete="new-password"
                 />
@@ -164,19 +238,24 @@
                 {showPass ? "🙈" : "👁️"}
                 </button>
             </div>
-            <p className="register-hint">Mínimo 8 caracteres</p>
+            {fieldError("password") ? (
+                <p className="register-error">{fieldError("password")}</p>
+            ) : (
+                <p className="register-hint">Mínimo 8 caracteres</p>
+            )}
             </div>
 
             {/* Confirmar contraseña */}
             <div className="register-field">
             <label className="register-label">Confirmar Contraseña</label>
-            <div className="register-input-wrap">
+            <div className={`register-input-wrap ${inputState("confirmPassword")}`}>
                 <span className="register-icon">🔒</span>
                 <input
                 type={showConfirm ? "text" : "password"}
                 name="confirmPassword"
                 value={form.confirmPassword}
                 onChange={handleChange}
+                onBlur={handleBlur}
                 placeholder="••••••••"
                 autoComplete="new-password"
                 />
@@ -189,12 +268,11 @@
                 {showConfirm ? "🙈" : "👁️"}
                 </button>
             </div>
-            {passwordsMatch && (
+            {fieldError("confirmPassword") ? (
+                <p className="register-error">{fieldError("confirmPassword")}</p>
+            ) : passwordsMatch ? (
                 <p className="register-match ok">✓ Las contraseñas coinciden</p>
-            )}
-            {passwordsMismatch && (
-                <p className="register-match no">✗ Las contraseñas no coinciden</p>
-            )}
+            ) : null}
             </div>
 
             {/* Botón */}
