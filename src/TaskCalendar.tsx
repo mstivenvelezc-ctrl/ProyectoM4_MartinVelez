@@ -1,6 +1,6 @@
     import { useState } from "react";
     import type { Tarea } from "./useTareas";
-    import "./TaskCalendar.css";
+    import "./styles/TaskCalendar.css";
 
     interface Props {
     tareas: Tarea[];

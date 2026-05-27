@@ -7,7 +7,7 @@ import TaskRouter from './TaskRouter';
 import Register from '../Register';
 import PrivateRoute from './PrivateRoute';
 import { AuthProvider } from './AuthProvider';
-import '../App.css';
+import '../styles/App.css';
 
 export default function AppRouter() {
   return (

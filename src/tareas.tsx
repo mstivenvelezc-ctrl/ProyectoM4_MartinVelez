@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useTareas } from "./useTareas";
 import type { Tarea } from "./useTareas";
 import { useAuth } from "./Routes/UseAuth";
-import './tareas.css';
+import './styles/tareas.css';
 
 function Tareas() {
   const { user } = useAuth(); 

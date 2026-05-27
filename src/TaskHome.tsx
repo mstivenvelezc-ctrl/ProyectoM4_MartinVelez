@@ -4,7 +4,7 @@ import { useTareas } from "./useTareas";
 import { useAuth } from "./Routes/UseAuth";
 import TaskCalendar from "./TaskCalendar";
 import UserCard from "./UserCard";
-import './TaskHome.css';
+import './styles/TaskHome.css';
 
 
 function TaskHome() {

@@ -1,7 +1,7 @@
     import { useState } from "react";
     import { useNavigate } from "react-router-dom";
     import { useAuth } from "./Routes/UseAuth";
-    import "./Login.css";
+    import "./styles/Login.css";
 
     interface LoginForm {
     email: string;

@@ -1,6 +1,6 @@
     import { useAuth } from "./Routes/UseAuth";
     import { useNavigate } from "react-router-dom";
-    import './UserCard.css';
+    import './styles/UserCard.css';
 
     export default function UserCard() {
     const { user } = useAuth();
