@@ -37,8 +37,9 @@ function Tareas() {
   } = useTareas(user?.correo ?? "");
 
   useEffect(() => {
-    document.title = "MyTask - Tareas";
-  }, []);
+    document.title = user ? `MyTask - ${user.nombre}` : "MyTask - Dashboard";
+  }, [user]);
+  
 
   const etiquetaEstado = (tarea: Tarea) => {
     if (tarea.estado === "completada") return <span className="badge badge-completada">✓ Completada</span>;

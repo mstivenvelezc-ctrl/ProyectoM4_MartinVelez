@@ -2,6 +2,8 @@
     import type { ReactNode } from "react";
     import { AuthContext } from "./AuthContext";
     import type { User } from "./AuthContext";
+    import { auth } from "../firebase";
+    import { signOut } from "firebase/auth";
 
     export function AuthProvider({ children }: { children: ReactNode }) {
     const [user, setUser] = useState<User | null>(() => {
@@ -13,25 +15,19 @@
         }
     });
 
-    const login = (userData: User, password?: string) => {
+    const login = (userData: User) => {
         setUser(userData);
         localStorage.setItem("auth_user", JSON.stringify(userData));
-
-        // Guarda el usuario en la lista de usuarios registrados
-    if (password) {
-        const usuarios = JSON.parse(localStorage.getItem("usuarios_registrados") || "[]");
-        const yaExiste = usuarios.find((u: User & { password: string }) => u.correo === userData.correo);
-        if (!yaExiste) {
-            usuarios.push({ ...userData, password });
-            localStorage.setItem("usuarios_registrados", JSON.stringify(usuarios));
-        }
-    }
     };
 
-    const logout = () => {
+    const logout = async () => {
+        try {
+        await signOut(auth);  // cierra sesión en Firebase
+        } catch (e) {
+        console.error("Error al cerrar sesión:", e);
+        }
         setUser(null);
-        localStorage.removeItem("auth_user"); 
-        
+        localStorage.removeItem("auth_user");
     };
 
     return (

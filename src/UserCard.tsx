@@ -12,15 +12,32 @@
 
     return (
         <div className="user-card">
-        <div className="user-card-avatar">{initials}</div>
+        <div className="user-card-avatar">
+            {user.foto ? (
+            <img
+                src={user.foto}
+                alt={`${user.nombre} ${user.apellido}`}
+                className="user-card-photo"
+                referrerPolicy="no-referrer"
+            />
+            ) : (
+            <span>{initials}</span>
+            )}
+        </div>
 
         <div className="user-card-info">
             <p className="user-card-name">{user.nombre} {user.apellido}</p>
             <p className="user-card-email">{user.correo}</p>
+            {user.proveedor === "google" ? (
+            <p className="user-card-provider">
+                <span className="user-card-label">Google</span>
+            </p>
+            ) : (
             <p className="user-card-age">
             <span className="user-card-label">Edad</span>
             <span>{user.edad} años</span>
             </p>
+            )}
         </div>
 
         <button

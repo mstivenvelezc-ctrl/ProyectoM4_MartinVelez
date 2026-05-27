@@ -1,8 +1,14 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from "./Routes/UseAuth";
 import './styles/App.css';
 
 function HomePage() {
+  const { user } = useAuth();
+  const [count, setCount] = useState(0);
+  const navigate = useNavigate();
+
+
   const features = [
     {
       icon: "⚡",
@@ -36,8 +42,12 @@ function HomePage() {
     },
   ];
 
-  const [count, setCount] = useState(0);
-  const navigate = useNavigate();
+
+    // titulo pestaña
+  useEffect(() => {
+    document.title = user ? `MyTask - ${user.nombre}` : "MyTask";
+  }, [user]);
+
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -119,10 +129,6 @@ function HomePage() {
 }
 
 function App() {
-  // titulo pestaña
-  useEffect(() => {
-    document.title = "MyTask";
-  }, []);
 
   return <HomePage />;
 }

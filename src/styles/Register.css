@@ -24,7 +24,7 @@
     margin-bottom: 1.2rem;
     }
 
-    .register-logo {
+    .register-logo svg {
     width: 70px;
     height: 70px;
     }
@@ -217,4 +217,57 @@
 
     .register-login a:hover {
     text-decoration: underline;
+    }
+
+    /* ── Añadidos para Firebase ── */
+    .register-firebase-error {
+    font-size: .78rem;
+    color: #f87171;
+    background: #2a1a1a;
+    border: 1px solid #f8717140;
+    border-radius: 8px;
+    padding: .5rem .8rem;
+    margin-bottom: .8rem;
+    }
+
+    .login-divider {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    margin: 1rem 0;
+    color: #444;
+    font-size: .78rem;
+    }
+    .login-divider::before,
+    .login-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #2a2a4a;
+    }
+
+    .login-btn-google {
+    width: 100%;
+    background: #0f0f1e;
+    border: 1.5px solid #2a2a4a;
+    border-radius: 10px;
+    color: #eee;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    font-size: .92rem;
+    padding: 11px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .6rem;
+    transition: border-color .2s, background .2s;
+    }
+    .login-btn-google:hover { border-color: #7c4dff; background: #16162a; }
+    .login-btn-google:disabled { opacity: .6; cursor: not-allowed; }
+
+    .register-divider-line {
+    height: 1px;
+    background: #2a2a4a;
+    margin: 1rem 0 .7rem;
     }

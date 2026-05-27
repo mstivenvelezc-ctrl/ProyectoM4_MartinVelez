@@ -88,7 +88,7 @@
     const conEntrega   = tareasDelMes.length;
 
     return (
-        <div className="calendar-wrapper">
+        <div className="calendar-wrapper" translate="no">
         {/* HEADER */}
         <div className="calendar-header">
             <div>

@@ -5,12 +5,14 @@
     apellido: string;
     edad: number;
     correo: string;
+    foto?: string;        // foto de perfil (Google)
+    proveedor?: string;   // "email" | "google"
     }
 
     export interface AuthContextType {
     user: User | null;
     isAuthenticated: boolean;
-    login: (userData: User, password?: string) => void;
+    login: (userData: User) => void;
     logout: () => void;
     }
 

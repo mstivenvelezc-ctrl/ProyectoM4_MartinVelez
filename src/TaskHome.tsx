@@ -11,8 +11,8 @@ function TaskHome() {
   const { user } = useAuth();
   const { tareas } = useTareas(user?.correo ?? "");
   useEffect(() => {
-    document.title = "MyTask - Dashboard";
-  }, []);
+    document.title =  user ? `MyTask - ${user.nombre}` : "MyTask - Dashboard";
+  }, [user]);
 
   return (
     <>
