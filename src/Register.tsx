@@ -1,4 +1,4 @@
-    import { useState } from "react";
+import { useState } from "react";
     import { useNavigate } from "react-router-dom";
     import { useAuth } from "./Routes/UseAuth";
     import "./styles/Register.css";
@@ -7,7 +7,7 @@
     interface RegisterForm {
     nombre: string;
     apellido: string;
-    edad: string;
+    fechaNacimiento: string;
     correo: string;
     password: string;
     confirmPassword: string;
@@ -33,12 +33,20 @@
         errors.apellido = "Mínimo 3 caracteres.";
     }
 
-    if (!form.edad) {
-        errors.edad = "La edad es obligatoria.";
-    } else if (Number(form.edad) < 18) {
-        errors.edad = "Debes tener al menos 18 años.";
-    } else if (Number(form.edad) > 120) {
-        errors.edad = "Edad inválida.";
+    if (!form.fechaNacimiento) {
+    errors.fechaNacimiento = "La fecha de nacimiento es obligatoria.";
+    } else {
+    const hoy = new Date();
+    const nacimiento = new Date(form.fechaNacimiento);
+    const edad = hoy.getFullYear() - nacimiento.getFullYear();
+    const cumpleEsteAnio = new Date(hoy.getFullYear(), nacimiento.getMonth(), nacimiento.getDate());
+    const edadReal = hoy >= cumpleEsteAnio ? edad : edad - 1;
+
+    if (edadReal < 18) {
+        errors.fechaNacimiento = "Debes ser mayor de 18 años para registrarte.";
+    } else if (edadReal > 120) {
+        errors.fechaNacimiento = "Fecha de nacimiento inválida.";
+    }
     }
 
     if (!form.correo.trim()) {
@@ -69,7 +77,7 @@
     const [form, setForm] = useState<RegisterForm>({
         nombre: "",
         apellido: "",
-        edad: "",
+        fechaNacimiento: "",
         correo: "",
         password: "",
         confirmPassword: "",
@@ -105,7 +113,7 @@
         const allTouched: TouchedFields = {
         nombre: true,
         apellido: true,
-        edad: true,
+        fechaNacimiento: true,
         correo: true,
         password: true,
         confirmPassword: true,
@@ -115,10 +123,17 @@
         if (!isFormValid) return;
 
         // TODO: llamar a tu API de registro aquí
+
+        const nacimiento = new Date(form.fechaNacimiento);
+        const hoy = new Date();
+        const edad = hoy.getFullYear() - nacimiento.getFullYear();
+        const cumpleEsteAnio = new Date(hoy.getFullYear(), nacimiento.getMonth(), nacimiento.getDate());
+        const edadReal = hoy >= cumpleEsteAnio ? edad : edad - 1;
+
         login({
         nombre: form.nombre.trim(),
         apellido: form.apellido.trim(),
-        edad: Number(form.edad),
+        edad: edadReal,
         correo: form.correo.trim(),
         }, form.password);
         localStorage.setItem("userToken", "logged");
@@ -197,22 +212,21 @@
 
             {/* Edad */}
             <div className="register-field">
-            <label className="register-label">Edad</label>
-            <div className={`register-input-wrap ${inputState("edad")}`}>
+            <label className="register-label">Fecha de nacimiento</label>
+            <div className={`register-input-wrap ${inputState("fechaNacimiento")}`}>
                 <span className="register-icon">📅</span>
                 <input
-                type="number"
-                name="edad"
-                value={form.edad}
+                type="date"
+                name="fechaNacimiento"
+                value={form.fechaNacimiento}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                placeholder="25"
-                min={1}
-                max={120}
+                max={new Date(new Date().setFullYear(new Date().getFullYear() - 18))
+                    .toISOString().split("T")[0]} // bloquea fecha menores de 18 años
                 />
             </div>
-            {fieldError("edad") && (
-                <p className="register-error">{fieldError("edad")}</p>
+            {fieldError("fechaNacimiento") && (
+                <p className="register-error">{fieldError("fechaNacimiento")}</p>
             )}
             </div>
 
