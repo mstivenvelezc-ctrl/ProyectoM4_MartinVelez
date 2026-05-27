@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap');
+
 :root {
   --bg: #0a0a0f;
   --surface: #111118;
@@ -7,8 +9,6 @@
   --muted: #7070a0;
   --border: rgba(108, 99, 255, 0.2);
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap');
 
 *, *::before, *::after {
   margin: 0;
@@ -88,7 +88,7 @@ nav {
 
 /* HERO */
 .hero {
-  min-height: 50vh;
+  min-height: 20vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -112,11 +112,9 @@ nav {
 
 .hero-content {
   position: relative;
-  max-width: 200px;
+  max-width: 1200px;
+  margin: 0 auto;
   animation: fadeUp 0.8s ease both;
-  flex: 1;
-  max-width: 1200px; /* límite máximo */
-  margin: 0 auto;    /* centra horizontalmente */
 }
 
 h1 {
@@ -164,6 +162,38 @@ h2 .highlight {
   flex-wrap: wrap;
 }
 
+/* DASHBOARD GRID */
+.dashboard-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.dashboard-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.section-title-dash {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--text);
+  margin: 0;
+}
+
+.section-title-dash .highlight {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 /* FOOTER */
 footer {
   text-align: center;
@@ -184,6 +214,32 @@ footer span {
 }
 
 /* RESPONSIVE */
+@media (min-width: 768px) {
+  .dashboard-grid {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .dashboard-col {
+    flex: 1;
+  }
+}
+
+@media (min-width: 1024px) {
+  .dashboard-grid {
+    padding: 3rem 2rem;
+    gap: 3rem;
+  }
+
+  .section-title-dash {
+    font-size: 2.2rem;
+  }
+
+  .hero-content {
+    font-size: 1.3rem;
+  }
+}
+
 @media (max-width: 1024px) {
   nav {
     padding: 0.8rem 1.2rem;
@@ -209,11 +265,6 @@ footer span {
   .hero-sub {
     font-size: 1rem;
   }
-
-  .hero-content {
-    font-size: 1.3rem;
-  }
-
 }
 
 @media (max-width: 768px) {

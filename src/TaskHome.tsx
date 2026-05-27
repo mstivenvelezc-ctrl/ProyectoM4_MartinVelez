@@ -19,11 +19,8 @@ function TaskHome() {
       <section className="hero">
         <div className="hero-glow" />
         <div className="hero-content">
-          <img src="/logo.png" alt="MyTask Logo" className="card-logo" />
           <h1>My<span>Task</span></h1>
-          <h2>
-            Panel de <span className="highlight">Control</span>
-          </h2>
+          <h2>Panel de <span className="highlight">Control</span></h2>
           <p className="hero-sub">
             Gestiona tus tareas de forma rápida y eficiente
           </p>
@@ -32,17 +29,16 @@ function TaskHome() {
       </section>
 
        {/* Card del usuario */}
-      <section className="user-section">
-        <h2 className="user-section-title">Mi <span>Perfil</span></h2>
-        <div className="user-section-content">
+      <div className="dashboard-grid">
+        <div className="dashboard-col">
+          <h2 className="section-title-dash">Mi <span className="highlight">Perfil</span></h2>
           <UserCard />
         </div>
-      </section>
-
-      <section className="calendar-section">
-        <h2 className="calendar-title-main">Calendario de Tareas</h2>
-        <TaskCalendar tareas={tareas} />
-      </section>
+        <div className="dashboard-col">
+          <h2 className="section-title-dash">Calendario de <span className="highlight">Tareas</span></h2>
+          <TaskCalendar tareas={tareas} />
+        </div>
+      </div>
 
       {/* FOOTER */}
       <footer>

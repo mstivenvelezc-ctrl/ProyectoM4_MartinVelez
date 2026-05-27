@@ -2,6 +2,7 @@
     import { useNavigate } from "react-router-dom";
     import { useAuth } from "./Routes/UseAuth";
     import "./styles/Register.css";
+    import Swal from 'sweetalert2';
 
     interface RegisterForm {
     nombre: string;
@@ -121,7 +122,20 @@
         correo: form.correo.trim(),
         }, form.password);
         localStorage.setItem("userToken", "logged");
+        Swal.fire({
+        title: "¡Registro exitoso!",
+        text: `Bienvenido, ${form.nombre.trim()}. Tu cuenta ha sido creada.`,
+        icon: "success",
+        confirmButtonText: "Comenzar →",
+        customClass: {
+            popup: "swal-popup",
+            title: "swal-title",
+            htmlContainer: "swal-text",
+            confirmButton: "swal-confirm",
+        },
+        }).then(() => {
         navigate("/taskhome");
+        });
     };
 
     const passwordsMatch =
