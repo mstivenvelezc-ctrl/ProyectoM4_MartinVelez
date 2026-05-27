@@ -1,5 +1,6 @@
     // src/useTareas.ts
     import { useState, useEffect } from "react";
+    import Swal from 'sweetalert2';
 
     export type EstadoTarea = "normal" | "prioridad" | "perdida" | "completada";
 
@@ -12,6 +13,16 @@
     estado: EstadoTarea;
     completada: boolean;
     }
+
+    const swalEstilos = {
+    customClass: {
+        popup: "swal-popup",
+        title: "swal-title",
+        htmlContainer: "swal-text",
+        confirmButton: "swal-confirm",
+        cancelButton: "swal-cancel",
+    },
+    };
 
     function getStorageKey(correo: string) {
     return `mytask_tareas_${correo}`;
@@ -59,20 +70,23 @@
     const [descripcion, setDescripcion] = useState("");
     const [fechaEntrega, setFechaEntrega] = useState("");
     const [error, setError] = useState("");
+    const [modalEditar, setModalEditar] = useState(false);
+    const [tareaEditando, setTareaEditando] = useState<Tarea | null>(null);
+    const [tituloEditar, setTituloEditar] = useState("");
+    const [descripcionEditar, setDescripcionEditar] = useState("");
+    const [fechaEntregaEditar, setFechaEntregaEditar] = useState("");
+    const [errorEditar, setErrorEditar] = useState("");
 
-    // Recarga tareas cuando cambia el usuario
     const [currentKey, setCurrentKey] = useState(key);
     if (key !== currentKey) {
         setCurrentKey(key);
         setTareas(cargarTareas(key));
-        }
+    }
 
-    // Guarda en localStorage cada vez que cambian las tareas
     useEffect(() => {
         guardarTareas(key, tareas);
     }, [tareas, key]);
 
-    // Recalcula estados cada minuto
     useEffect(() => {
         const interval = setInterval(() => {
         setTareas((prev) =>
@@ -101,17 +115,42 @@
     };
 
     const eliminarTarea = (id: string) => {
-        if (window.confirm("¿Estás seguro de que deseas eliminar esta tarea?")) {
+    const tarea = tareas.find((t) => t.id === id);
+    const esCompletada = tarea?.estado === "completada";
+
+    Swal.fire({
+        title: esCompletada ? "¿Eliminar tarea completada?" : "¿Eliminar tarea?",
+        text: esCompletada
+        ? "La tarea fue completada. ¿Deseas eliminarla del historial?"
+        : "Esta acción no se puede deshacer.",
+        icon: esCompletada ? "success" : "warning",
+        showCancelButton: true,
+        confirmButtonText: "Sí, eliminar",
+        cancelButtonText: "Cancelar",
+        ...swalEstilos,
+        }).then((result: { isConfirmed: boolean }) => {
+        if (result.isConfirmed) {
         setTareas((prev) => prev.filter((t) => t.id !== id));
         }
+        });
     };
 
     const completarTarea = (id: string) => {
-        if (window.confirm("Una vez completada la tarea no se puede desmarcar")) {
-        setTareas((prev) =>
+        Swal.fire({
+        title: "¿Completar tarea?",
+        text: "Una vez completada no se puede desmarcar.",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "Sí, completar",
+        cancelButtonText: "Cancelar",
+        ...swalEstilos,
+        }).then((result: { isConfirmed: boolean }) => {
+        if (result.isConfirmed) {
+            setTareas((prev) =>
             prev.map((t) => t.id === id ? { ...t, completada: true, estado: "completada" } : t)
-        );
+            );
         }
+        });
     };
 
     const crearTarea = () => {
@@ -163,6 +202,15 @@
 
         setTareas((prev) => [nueva, ...prev]);
         cerrarModal();
+
+        Swal.fire({
+        title: "¡Tarea creada!",
+        text: `"${nueva.titulo}" fue agregada correctamente.`,
+        icon: "success",
+        timer: 2000,
+        showConfirmButton: false,
+        ...swalEstilos,
+        });
     };
 
     const formatearFecha = (fecha: Date): string => {
@@ -173,6 +221,72 @@
         hour: "2-digit",
         minute: "2-digit",
         });
+    };
+
+    const abrirModalEditar = (tarea: Tarea) => {
+  setTareaEditando(tarea);
+  setTituloEditar(tarea.titulo);
+  setDescripcionEditar(tarea.descripcion);
+  setFechaEntregaEditar(
+    tarea.fechaEntrega
+      ? new Date(tarea.fechaEntrega.getTime() - tarea.fechaEntrega.getTimezoneOffset() * 60000)
+          .toISOString()
+          .slice(0, 16)
+      : ""
+  );
+  setErrorEditar("");
+  setModalEditar(true);
+};
+
+const cerrarModalEditar = () => {
+  setModalEditar(false);
+  setTareaEditando(null);
+  setErrorEditar("");
+};
+
+    const guardarEdicion = () => {
+    if (!tituloEditar.trim() || !descripcionEditar.trim()) {
+        setErrorEditar("Por favor completa todos los campos.");
+        return;
+    }
+    if (tituloEditar.trim().length < 3) {
+        setErrorEditar("El título debe tener al menos 3 caracteres.");
+        return;
+    }
+    if (descripcionEditar.trim().length < 5) {
+        setErrorEditar("La descripción debe tener al menos 5 caracteres.");
+        return;
+    }
+    if (descripcionEditar.trim().length > 200) {
+        setErrorEditar("La descripción no puede superar los 200 caracteres.");
+        return;
+    }
+
+    const entrega = fechaEntregaEditar ? new Date(fechaEntregaEditar) : undefined;
+
+    setTareas((prev) =>
+        prev.map((t) =>
+        t.id === tareaEditando?.id
+            ? {
+                ...t,
+                titulo: tituloEditar.trim(),
+                descripcion: descripcionEditar.trim(),
+                fechaEntrega: entrega,
+                estado: calcularEstado(entrega),
+            }
+            : t
+        )
+    );
+
+    cerrarModalEditar();
+
+    Swal.fire({
+        title: "¡Tarea actualizada!",
+        icon: "success",
+        timer: 1500,
+        showConfirmButton: false,
+        ...swalEstilos,
+    });
     };
 
     return {
@@ -191,5 +305,16 @@
         eliminarTarea,
         completarTarea,
         formatearFecha,
+        modalEditar,
+        tituloEditar,
+        descripcionEditar,
+        fechaEntregaEditar,
+        errorEditar,
+        setTituloEditar,
+        setDescripcionEditar,
+        setFechaEntregaEditar,
+        abrirModalEditar,
+        cerrarModalEditar,
+        guardarEdicion,
     };
     }
