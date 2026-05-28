@@ -35,7 +35,6 @@
     // ── Suscripción en tiempo real ─────────────────────────────────────────────
     useEffect(() => {
         if (!correo) return;
-        setCargando(true);
         const unsub = suscribirTareas(
         correo,
         (data) => { setTareas(data); setCargando(false); },

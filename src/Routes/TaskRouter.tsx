@@ -16,7 +16,7 @@
       <div className="app">
         <nav>
           <div className="nav-inner">
-            <div className="nav-logo">My<span>Task</span></div>
+            <Link to="/taskhome" className="nav-logo">My<span>Task</span></Link>
             <ul className="nav-links">
               <li><Link to="/taskhome">Inicio</Link></li>
               <li><Link to="/taskhome/tareas">Tareas</Link></li>

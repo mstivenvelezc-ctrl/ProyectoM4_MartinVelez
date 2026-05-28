@@ -24,6 +24,18 @@
         setError("Completa todos los campos.");
         return;
         }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(correo)) {
+        setError("Ingresa un correo electrónico válido.");
+        return;
+        }
+
+        if (password.length < 8) {
+        setError("La contraseña debe tener mínimo 8 caracteres.");
+        return;
+        }
+
         setLoading(true);
         setError("");
         try {

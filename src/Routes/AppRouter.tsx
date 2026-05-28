@@ -15,7 +15,7 @@ export default function AppRouter() {
       <div className="app">
         <nav>
           <div className="nav-inner">
-            <div className="nav-logo">My<span>Task</span></div>
+            <Link to="/" className="nav-logo">My<span>Task</span></Link>
             <ul className="nav-links">
               <li><Link to="/">Home</Link></li>
               <li><Link to="/about">About</Link></li>
