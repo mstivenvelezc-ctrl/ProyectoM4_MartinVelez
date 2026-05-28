@@ -4,6 +4,9 @@
     import { auth, googleProvider } from "./firebase";
     import { useAuth } from "./Routes/UseAuth";
     import "./styles/Login.css";
+    import Swal from 'sweetalert2';
+
+
 
     export default function Login() {
     const { login } = useAuth();
@@ -59,6 +62,31 @@
             foto:      fbUser.photoURL ?? undefined,
             proveedor: "google",
         });
+
+        // Muestra "Accediendo..."
+    Swal.fire({
+    title: "Accediendo...",
+    html: `
+        <div style="display:flex; flex-direction:column; align-items:center; gap:1rem; padding:0.5rem 0">
+        <div class="swal-spinner"></div>
+        <p style="color:#7070a0; font-size:0.9rem; margin:0">Verificando tus credenciales</p>
+        </div>
+    `,
+    showConfirmButton: false,
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+    timer: 1500,
+    customClass: {
+        popup: "swal-popup",
+        title: "swal-title",
+    },
+    });
+
+    await new Promise((r) => setTimeout(r, 1500));
+
+    localStorage.setItem("userToken", "logged");
+    navigate("/taskhome");
+
         navigate("/taskhome");
         } catch (e: unknown) {
         setError(getFirebaseError(e));

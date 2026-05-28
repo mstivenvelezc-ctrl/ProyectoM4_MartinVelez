@@ -130,18 +130,48 @@
 
         localStorage.setItem("userToken", "logged");
 
-        await Swal.fire({
-            title: "¡Registro exitoso!",
-            text: `Bienvenido, ${form.nombre.trim()}. Tu cuenta ha sido creada.`,
-            icon: "success",
-            confirmButtonText: "Comenzar →",
-            customClass: {
-            popup:           "swal-popup",
-            title:           "swal-title",
-            htmlContainer:   "swal-text",
-            confirmButton:   "swal-confirm",
-            },
-        });
+// Primero muestra "Creando cuenta..."
+    Swal.fire({
+    title: "Creando tu cuenta...",
+    html: `
+        <div style="display:flex; flex-direction:column; align-items:center; gap:1rem; padding:0.5rem 0">
+        <div class="swal-spinner"></div>
+        <p style="color:#7070a0; font-size:0.9rem; margin:0">Configurando tu espacio de trabajo</p>
+        </div>
+    `,
+    showConfirmButton: false,
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+    timer: 2000,
+    customClass: {
+        popup: "swal-popup",
+        title: "swal-title",
+    },
+    });
+
+// Espera 2 segundos y muestra éxito
+await new Promise((r) => setTimeout(r, 2000));
+
+    await Swal.fire({
+    title: "¡Bienvenido!",
+    html: `
+        <div style="display:flex; flex-direction:column; align-items:center; gap:0.5rem">
+        <p style="color:#7070a0; font-size:0.95rem; margin:0">
+            Tu cuenta ha sido creada, <strong style="color:#f0f0f8">${form.nombre.trim()}</strong>
+        </p>
+        </div>
+    `,
+    icon: "success",
+    confirmButtonText: "Comenzar →",
+    timer: 3000,
+    timerProgressBar: true,
+    customClass: {
+        popup: "swal-popup",
+        title: "swal-title",
+        htmlContainer: "swal-text",
+        confirmButton: "swal-confirm",
+    },
+    });
 
         navigate("/taskhome");
         } catch (e) {
@@ -167,6 +197,49 @@
             foto:      fbUser.photoURL ?? undefined,
             proveedor: "google",
         });
+
+        Swal.fire({
+    title: "Creando tu cuenta...",
+    html: `
+        <div style="display:flex; flex-direction:column; align-items:center; gap:1rem; padding:0.5rem 0">
+        <div class="swal-spinner"></div>
+        <p style="color:#7070a0; font-size:0.9rem; margin:0">Configurando tu espacio de trabajo</p>
+        </div>
+    `,
+    showConfirmButton: false,
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+    timer: 2000,
+    customClass: {
+        popup: "swal-popup",
+        title: "swal-title",
+    },
+    });
+
+    await new Promise((r) => setTimeout(r, 2000));
+
+    await Swal.fire({
+    title: "¡Bienvenido!",
+    html: `
+        <div style="display:flex; flex-direction:column; align-items:center; gap:0.5rem">
+        <p style="color:#7070a0; font-size:0.95rem; margin:0">
+            Tu cuenta ha sido creada, <strong style="color:#f0f0f8">${form.nombre.trim()}</strong>
+        </p>
+        </div>
+    `,
+    icon: "success",
+    confirmButtonText: "Comenzar →",
+    timer: 3000,
+    timerProgressBar: true,
+    customClass: {
+        popup: "swal-popup",
+        title: "swal-title",
+        htmlContainer: "swal-text",
+        confirmButton: "swal-confirm",
+    },
+    });
+
+
         navigate("/taskhome");
         } catch (e) {
         setFirebaseError(getFirebaseError(e));
