@@ -4,12 +4,14 @@ import { useTareas } from "./useTareas";
 import { useAuth } from "./Routes/UseAuth";
 import TaskCalendar from "./TaskCalendar";
 import UserCard from "./UserCard";
+import EmailResumenBtn from "./EmailResumenBtn";
 import './styles/TaskHome.css';
 
 
 function TaskHome() {
   const { user } = useAuth();
   const { tareas } = useTareas(user?.correo ?? "");
+
   useEffect(() => {
     document.title =  user ? `MyTask - ${user.nombre}` : "MyTask - Dashboard";
   }, [user]);
@@ -25,6 +27,7 @@ function TaskHome() {
             Gestiona tus tareas de forma rápida y eficiente
           </p>
           <div className="hero-actions" />
+          <EmailResumenBtn tareas={tareas} />
         </div>
       </section>
 
