@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1780159656895" clover="3.2.0">
+  <project timestamp="1780159656895" name="All files">
+    <metrics statements="61" coveredstatements="58" conditionals="44" coveredconditionals="35" methods="12" coveredmethods="12" elements="117" coveredelements="105" complexity="0" loc="61" ncloc="61" packages="2" files="4" classes="4"/>
+    <package name="src">
+      <metrics statements="61" coveredstatements="58" conditionals="44" coveredconditionals="35" methods="12" coveredmethods="12"/>
+      <file name="EmailResumenBtn.tsx" path="C:\Users\mstiv\OneDrive\Desktop\ProyectoM4_MartinVelez\src\EmailResumenBtn.tsx">
+        <metrics statements="17" coveredstatements="17" conditionals="12" coveredconditionals="8" methods="2" coveredmethods="2"/>
+        <line num="14" count="9" type="stmt"/>
+        <line num="15" count="9" type="stmt"/>
+        <line num="17" count="9" type="stmt"/>
+        <line num="27" count="9" type="stmt"/>
+        <line num="28" count="5" type="cond" truecount="1" falsecount="1"/>
+        <line num="30" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="40" count="4" type="stmt"/>
+        <line num="50" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="52" count="3" type="stmt"/>
+        <line num="53" count="3" type="stmt"/>
+        <line num="54" count="3" type="stmt"/>
+        <line num="55" count="2" type="stmt"/>
+        <line num="64" count="1" type="stmt"/>
+        <line num="71" count="3" type="stmt"/>
+        <line num="75" count="9" type="stmt"/>
+      </file>
+      <file name="Tareas.helpers.ts" path="C:\Users\mstiv\OneDrive\Desktop\ProyectoM4_MartinVelez\src\Tareas.helpers.ts">
+        <metrics statements="29" coveredstatements="26" conditionals="24" coveredconditionals="21" methods="3" coveredmethods="3"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="16" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="17" count="3" type="stmt"/>
+        <line num="18" count="3" type="stmt"/>
+        <line num="19" count="3" type="stmt"/>
+        <line num="20" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="21" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="26" count="2" type="stmt"/>
+        <line num="40" count="8" type="cond" truecount="4" falsecount="0"/>
+        <line num="41" count="2" type="stmt"/>
+        <line num="42" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="43" count="6" type="stmt"/>
+        <line num="44" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="45" count="5" type="stmt"/>
+        <line num="46" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="47" count="4" type="stmt"/>
+        <line num="49" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="50" count="2" type="stmt"/>
+        <line num="51" count="2" type="stmt"/>
+        <line num="52" count="2" type="stmt"/>
+        <line num="53" count="2" type="stmt"/>
+        <line num="55" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="56" count="1" type="stmt"/>
+        <line num="57" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="58" count="0" type="stmt"/>
+        <line num="59" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="60" count="0" type="stmt"/>
+        <line num="63" count="2" type="stmt"/>
+      </file>
+      <file name="email-services.ts" path="C:\Users\mstiv\OneDrive\Desktop\ProyectoM4_MartinVelez\src\email-services.ts">
+        <metrics statements="15" coveredstatements="15" conditionals="8" coveredconditionals="6" methods="7" coveredmethods="7"/>
+        <line num="6" count="8" type="stmt"/>
+        <line num="7" count="16" type="stmt"/>
+        <line num="8" count="16" type="stmt"/>
+        <line num="9" count="16" type="stmt"/>
+        <line num="10" count="16" type="stmt"/>
+        <line num="12" count="8" type="stmt"/>
+        <line num="13" count="16" type="cond" truecount="2" falsecount="0"/>
+        <line num="20" count="16" type="stmt"/>
+        <line num="27" count="16" type="stmt"/>
+        <line num="35" count="8" type="stmt"/>
+        <line num="61" count="8" type="stmt"/>
+        <line num="63" count="8" type="stmt"/>
+        <line num="73" count="8" type="cond" truecount="2" falsecount="0"/>
+        <line num="74" count="2" type="stmt"/>
+        <line num="75" count="2" type="cond" truecount="1" falsecount="1"/>
+      </file>
+    </package>
+    <package name="src.styles">
+      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="EmailResumenBtn.css" path="C:\Users\mstiv\OneDrive\Desktop\ProyectoM4_MartinVelez\src\styles\EmailResumenBtn.css">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+  </project>
+</coverage>
