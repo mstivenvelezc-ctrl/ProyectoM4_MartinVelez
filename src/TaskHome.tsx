@@ -5,6 +5,7 @@ import { useAuth } from "./Routes/UseAuth";
 import TaskCalendar from "./TaskCalendar";
 import UserCard from "./UserCard";
 import EmailResumenBtn from "./EmailResumenBtn";
+import WhatsAppAlertBtn from "./Whatsappalertbtn";
 import './styles/TaskHome.css';
 
 
@@ -28,6 +29,7 @@ function TaskHome() {
           </p>
           <div className="hero-actions" />
           <EmailResumenBtn tareas={tareas} />
+          <WhatsAppAlertBtn tareas={tareas} />
         </div>
       </section>
 

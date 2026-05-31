@@ -26,7 +26,7 @@
     }));
 
     import EmailResumenBtn from '../EmailResumenBtn';
-    import { enviarResumenEmail } from '../email-services';
+    import { enviarResumenEmail } from '../email.service';
     import Swal from 'sweetalert2';
 
     const tareasMock: Tarea[] = [

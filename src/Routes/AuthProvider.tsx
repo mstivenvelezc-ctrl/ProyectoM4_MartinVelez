@@ -30,8 +30,15 @@
         localStorage.removeItem("auth_user");
     };
 
+    const actualizarTelefono = (telefono: string) => {
+    if (!user) return;
+    const updated = { ...user, telefono };
+    setUser(updated);
+    localStorage.setItem("auth_user", JSON.stringify(updated));
+    };
+
     return (
-        <AuthContext.Provider value={{ user, isAuthenticated: !!user, login, logout }}>
+        <AuthContext.Provider value={{ user, isAuthenticated: !!user, login, logout, actualizarTelefono }}>
         {children}
         </AuthContext.Provider>
     );

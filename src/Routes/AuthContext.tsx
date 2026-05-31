@@ -5,6 +5,7 @@
     apellido: string;
     edad: number;
     correo: string;
+    telefono?:  string;   // para alertas de WhatsApp
     foto?: string;        // foto de perfil (Google)
     proveedor?: string;   // "email" | "google"
     }
@@ -14,6 +15,7 @@
     isAuthenticated: boolean;
     login: (userData: User) => void;
     logout: () => void;
+    actualizarTelefono: (telefono: string) => void;
     }
 
     export const AuthContext = createContext<AuthContextType | undefined>(undefined);

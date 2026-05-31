@@ -2,7 +2,7 @@
     import { useState } from "react";
     import Swal from "sweetalert2";
     import { useAuth } from "./Routes/UseAuth";
-    import { enviarResumenEmail } from "./email-services";
+    import { enviarResumenEmail } from "./email.service";
     import type { Tarea } from "./Tareas.types";
     import "./styles/EmailResumenBtn.css";
 
