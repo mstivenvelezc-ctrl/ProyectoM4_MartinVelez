@@ -1,4 +1,4 @@
-    // api/send-whatsapp.ts — Vercel Serverless Function
+    // api/sendWhatsApp.ts — Vercel Serverless Function
     import type { VercelRequest, VercelResponse } from "@vercel/node";
     import twilio from "twilio";
 
@@ -18,15 +18,16 @@
         return res.status(400).json({ error: "Faltan campos: to, message." });
     }
 
-    // ← agrega aquí
-  console.log("FROM:", process.env.TWILIO_WHATSAPP_NUMBER);
-  console.log("TO:", `whatsapp:${to}`);
+    // Asegurar que el número tenga el + al inicio
+    const numero = to.startsWith("+") ? to : `+${to}`;
 
+    console.log("FROM:", process.env.TWILIO_WHATSAPP_NUMBER);
+    console.log("TO:", `whatsapp:${numero}`);
 
     try {
         await client.messages.create({
         from: process.env.TWILIO_WHATSAPP_NUMBER!,
-        to:   `whatsapp:${to}`,
+        to:   `whatsapp:${numero}`,
         body: message,
         });
         res.status(200).json({ message: "WhatsApp enviado con éxito." });
