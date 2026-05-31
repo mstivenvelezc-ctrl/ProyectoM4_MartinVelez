@@ -48,7 +48,7 @@
     ): Promise<void> {
     const message = generarMensajeAlerta(tareas, nombre);
 
-    const response = await fetch("/api/send-whatsapp", {
+    const response = await fetch("/api/sendWhatsApp", {
         method:  "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ to: telefono, message }),
