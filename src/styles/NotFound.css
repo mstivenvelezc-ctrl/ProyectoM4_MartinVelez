@@ -1,0 +1,114 @@
+    /* src/styles/NotFound.css */
+    .notfound-container {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    background: #0d0d1a;
+    }
+
+    /* ── Número 404 con efecto glitch ── */
+    .notfound-glitch-wrap {
+    position: relative;
+    margin-bottom: 1.5rem;
+    }
+
+    .notfound-code {
+    display: block;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: clamp(6rem, 20vw, 12rem);
+    color: #fff;
+    line-height: 1;
+    letter-spacing: -4px;
+    }
+
+    .notfound-code.glitch {
+    position: absolute;
+    top: 0; left: 0; width: 100%;
+    color: #c850c0;
+    clip-path: polygon(0 30%, 100% 30%, 100% 50%, 0 50%);
+    animation: glitch1 2.5s infinite linear;
+    opacity: 0.8;
+    }
+
+    .notfound-code.glitch2 {
+    position: absolute;
+    top: 0; left: 0; width: 100%;
+    color: #7c4dff;
+    clip-path: polygon(0 60%, 100% 60%, 100% 75%, 0 75%);
+    animation: glitch2 2.5s infinite linear;
+    opacity: 0.7;
+    }
+
+    @keyframes glitch1 {
+    0%, 90%, 100% { transform: translate(0); }
+    92%           { transform: translate(-4px, 2px); }
+    94%           { transform: translate(4px, -2px); }
+    96%           { transform: translate(-2px, 0); }
+    }
+
+    @keyframes glitch2 {
+    0%, 85%, 100% { transform: translate(0); }
+    87%           { transform: translate(4px, 3px); }
+    90%           { transform: translate(-3px, -1px); }
+    93%           { transform: translate(2px, 0); }
+    }
+
+    /* ── Texto ── */
+    .notfound-title {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    color: #fff;
+    margin: 0 0 .6rem;
+    }
+
+    .notfound-sub {
+    font-size: .95rem;
+    color: #888;
+    margin: 0 0 2rem;
+    max-width: 340px;
+    }
+
+    /* ── Botones ── */
+    .notfound-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    }
+
+    .notfound-btn-primary {
+    background: linear-gradient(90deg, #7c4dff, #c850c0);
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 12px 28px;
+    cursor: pointer;
+    transition: opacity .2s, transform .1s;
+    }
+
+    .notfound-btn-primary:hover  { opacity: .88; }
+    .notfound-btn-primary:active { transform: scale(.97); }
+
+    .notfound-btn-secondary {
+    background: transparent;
+    border: 1.5px solid #2a2a4a;
+    border-radius: 10px;
+    color: #aaa;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 12px 28px;
+    cursor: pointer;
+    transition: border-color .2s, color .2s;
+    }
+
+    .notfound-btn-secondary:hover { border-color: #7c4dff; color: #fff; }

@@ -1,4 +1,4 @@
-import { Link, Routes, Route } from 'react-router-dom';
+import { Link, Routes, Route, Navigate } from 'react-router-dom';
 
 import App from '../App';
 import Login from '../Login';
@@ -7,6 +7,7 @@ import TaskRouter from './TaskRouter';
 import Register from '../Register';
 import PrivateRoute from './PrivateRoute';
 import { AuthProvider } from './AuthProvider';
+import NotFound from '../NotFound';
 import '../styles/App.css';
 
 export default function AppRouter() {
@@ -35,6 +36,11 @@ export default function AppRouter() {
           <Route element={<PrivateRoute />}>
             <Route path="/taskhome/*" element={<TaskRouter />} />
           </Route>
+
+          {/* 404 */}
+          <Route path="/404"  element={<NotFound />} />
+          <Route path="*"     element={<Navigate to="/404" replace />} />
+
         </Routes>
       </div>
     </AuthProvider>

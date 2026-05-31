@@ -62,3 +62,28 @@
     }
     return null;
     }
+
+    // ── Ordenar por prioridad ─────────────────────────────────────────────────────
+    // Orden: perdida → prioridad → normal → completada
+    const ORDEN_ESTADO: Record<string, number> = {
+    perdida:    0,
+    prioridad:  1,
+    normal:     2,
+    completada: 3,
+    };
+
+    export function ordenarPorPrioridad<T extends { estado: string; fechaEntrega?: Date }>(
+    tareas: T[]
+    ): T[] {
+    return [...tareas].sort((a, b) => {
+        const diff = (ORDEN_ESTADO[a.estado] ?? 2) - (ORDEN_ESTADO[b.estado] ?? 2);
+        if (diff !== 0) return diff;
+        // mismo estado → ordena por fecha de entrega más próxima
+        if (a.fechaEntrega && b.fechaEntrega) {
+        return a.fechaEntrega.getTime() - b.fechaEntrega.getTime();
+        }
+        if (a.fechaEntrega) return -1;
+        if (b.fechaEntrega) return 1;
+        return 0;
+    });
+    }

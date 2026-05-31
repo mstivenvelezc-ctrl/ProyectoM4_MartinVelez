@@ -3,7 +3,7 @@
     import { useState, useEffect } from "react";
     import Swal from "sweetalert2";
     import type { Tarea } from "./Tareas.types";
-    import { calcularEstado, formatearFecha, validarTarea, swalEstilos } from "./Tareas.helpers";
+    import { calcularEstado, formatearFecha, validarTarea, swalEstilos, ordenarPorPrioridad } from "./Tareas.helpers";
     import {
     crearTareaFS,
     actualizarTareaFS,
@@ -15,7 +15,7 @@
 
     export function useTareas(correo: string) {
     const [tareas, setTareas]           = useState<Tarea[]>([]);
-    const [cargando, setCargando]       = useState(true);
+    const [cargando, setCargando]       = useState(false);
 
     // Modal crear
     const [modalAbierto, setModalAbierto] = useState(false);
@@ -37,7 +37,7 @@
         if (!correo) return;
         const unsub = suscribirTareas(
         correo,
-        (data) => { setTareas(data); setCargando(false); },
+        (data) => { setTareas(ordenarPorPrioridad(data)); setCargando(false); },
         ()     => { setCargando(false); }
         );
         return () => unsub();
@@ -216,5 +216,5 @@
         abrirModalEditar,
         cerrarModalEditar,
         guardarEdicion,
-        };
+    };
     }
