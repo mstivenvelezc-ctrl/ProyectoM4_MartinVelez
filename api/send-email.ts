@@ -31,6 +31,10 @@
         Source: process.env.AWS_SES_FROM_EMAIL!, // identidad verificada en SES
     });
 
+    console.log("KEY:", process.env.AWS_ACCESS_KEY_ID ? "OK" : "VACÍA");
+    console.log("SECRET:", process.env.AWS_SECRET_ACCESS_KEY ? "OK" : "VACÍA");
+    console.log("FROM:", process.env.AWS_SES_FROM_EMAIL ? "OK" : "VACÍA");
+
     try {
         await sesClient.send(command);
         res.status(200).json({ message: "Email enviado con éxito." });
