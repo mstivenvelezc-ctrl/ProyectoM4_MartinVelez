@@ -18,6 +18,11 @@
         return res.status(400).json({ error: "Faltan campos: to, message." });
     }
 
+    // ← agrega aquí
+  console.log("FROM:", process.env.TWILIO_WHATSAPP_NUMBER);
+  console.log("TO:", `whatsapp:${to}`);
+
+
     try {
         await client.messages.create({
         from: process.env.TWILIO_WHATSAPP_NUMBER!,
