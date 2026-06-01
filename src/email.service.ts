@@ -1,9 +1,9 @@
-    // src/email.service.ts — llama al endpoint sin exponer credenciales
-
+    // src/email.service.ts — llama al endpoint con autenticación Firebase
+    import { auth } from "./firebase";
     import type { Tarea } from "./Tareas.types";
 
     function generarResumen(tareas: Tarea[], nombre: string): string {
-    const total      = tareas.length;
+    const total       = tareas.length;
     const completadas = tareas.filter((t) => t.estado === "completada").length;
     const perdidas    = tareas.filter((t) => t.estado === "perdida").length;
     const prioridad   = tareas.filter((t) => t.estado === "prioridad").length;
@@ -58,11 +58,21 @@
     nombre: string,
     tareas: Tarea[]
     ): Promise<void> {
-    const body = generarResumen(tareas, nombre);
+    // Obtener el token de Firebase del usuario actual
+    const currentUser = auth.currentUser;
+    if (!currentUser) {
+        throw new Error("No hay sesión activa. Inicia sesión nuevamente.");
+    }
+
+    const idToken = await currentUser.getIdToken();
+    const body    = generarResumen(tareas, nombre);
 
     const response = await fetch("/api/send-email", {
         method:  "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+        "Content-Type":  "application/json",
+        "Authorization": `Bearer ${idToken}`,   // token verificado en el servidor
+        },
         body: JSON.stringify({
         to:      correo,
         subject: "📋 Resumen de tus tareas — MyTask",

@@ -1,4 +1,4 @@
-    import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
     import { useNavigate, Link } from "react-router-dom";
     import { signInWithEmailAndPassword } from "firebase/auth";
     import { auth } from "./firebase";
@@ -115,7 +115,6 @@
 
         await new Promise((r) => setTimeout(r, 1500));
 
-        localStorage.setItem("userToken", "logged");
         navigate("/taskhome");
         } catch (e: unknown) {
         setError(getFirebaseError(e));
@@ -146,7 +145,7 @@
                 value={correo}
                 onChange={(e) => setCorreo(e.target.value)}
                 placeholder="tucorreo@email.com"
-                autoComplete="off"
+                autoComplete="email"
                 />
             </div>
             </div>
