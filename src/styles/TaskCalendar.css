@@ -136,6 +136,13 @@
     line-height: 1;
     }
 
+    .cal-day.disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    pointer-events: none;
+    color: var(--muted);
+    }
+
     .cal-nav-btn:hover {
     border-color: var(--border);
     color: var(--text);

@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useTareas } from "./useTareas";
 import type { Tarea } from "./useTareas";
 import { useAuth } from "./Routes/UseAuth";
+import EmailResumenBtn from "./EmailResumenBtn";
 import './styles/tareas.css';
 
 function Tareas() {
@@ -34,6 +35,7 @@ function Tareas() {
     abrirModalEditar,
     cerrarModalEditar,
     guardarEdicion,
+    creando,
   } = useTareas(user?.correo ?? "");
 
   useEffect(() => {
@@ -54,6 +56,7 @@ function Tareas() {
         <div className="tareas-container">
           <div className="tareas-header">
             <h1>Mis <span>Tareas</span></h1>
+            <EmailResumenBtn tareas={tareas} />
             <button className="btn-nueva-tarea" onClick={abrirModal}>
               + Nueva Tarea
             </button>
@@ -163,7 +166,8 @@ function Tareas() {
 
             <div className="modal-footer">
               <button className="btn-cancelar" onClick={cerrarModal}>Cancelar</button>
-              <button className="btn-crear" onClick={crearTarea}>Crear Tarea</button>
+              <button className="btn-crear" onClick={crearTarea} disabled={creando}> {creando ? "Creando..." : "Crear Tarea"}
+              </button>
             </div>
           </div>
         </div>

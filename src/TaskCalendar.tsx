@@ -57,12 +57,14 @@
     });
     };
 
+
     // Determinar clase CSS del día
     const claseDia = (dia: number): string => {
         const fecha  = new Date(anio, mes, dia);
         const tareas = tareasDelDia(dia);
         const clases = ["cal-day"];
 
+        if (esPasado(dia)) clases.push("disabled");
         if (isSameDay(fecha, hoy)) clases.push("today");
 
         if (tareas.length > 0) {
@@ -82,6 +84,12 @@
         ...Array(primerDia).fill(null),
         ...Array.from({ length: diasEnMes }, (_, i) => i + 1),
     ];
+
+    const esPasado = (dia: number): boolean => {
+    const fecha = new Date(anio, mes, dia);
+    fecha.setHours(23, 59, 59);
+    return fecha < hoy;
+    };
 
     // Contar tareas con prioridad este mes
     const conPrioridad = tareasDelMes.filter((t) => t.estado === "prioridad").length;
@@ -125,7 +133,7 @@
                 <div
                 key={dia}
                 className={claseDia(dia)}
-                onMouseEnter={() => tieneTareas ? setHoveredDay(dia) : null}
+                onMouseEnter={() => tieneTareas&& !esPasado(dia) ? setHoveredDay(dia) : null}
                 onMouseLeave={() => setHoveredDay(null)}
                 >
                 {dia}

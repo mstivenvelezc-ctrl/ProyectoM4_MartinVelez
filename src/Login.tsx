@@ -124,6 +124,8 @@
         }
     };
 
+    const isLoginValid = correo.trim() !== "" && password.length >= 8;
+
     return (
         <div className="login-container">
         <div className="login-card">
@@ -176,7 +178,7 @@
 
             {error && <p className="login-error">⚠ {error}</p>}
 
-            <button className="login-btn" onClick={handleEmailLogin} disabled={loading}>
+            <button className="login-btn" onClick={handleEmailLogin} disabled={loading || !isLoginValid}>
             {loading ? "Iniciando..." : "Iniciar sesión →"}
             </button>
 

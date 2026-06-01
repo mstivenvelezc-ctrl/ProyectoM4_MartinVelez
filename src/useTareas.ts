@@ -16,6 +16,7 @@
     export function useTareas(correo: string) {
     const [tareas, setTareas]           = useState<Tarea[]>([]);
     const [cargando, setCargando]       = useState(false);
+    const [creando, setCreando]   = useState(false);
 
     // Modal crear
     const [modalAbierto, setModalAbierto] = useState(false);
@@ -67,7 +68,9 @@
     const crearTarea = async () => {
         const err = validarTarea(titulo, descripcion, fechaEntrega);
         if (err) { setError(err); return; }
+        if (creando) return;
 
+        setCreando(true);
         const entrega = fechaEntrega ? new Date(fechaEntrega) : undefined;
         const nueva: Omit<Tarea, "id"> = {
         titulo:      titulo.trim(),
@@ -91,7 +94,9 @@
         });
         } catch {
         setError("Error al guardar la tarea. Intenta de nuevo.");
-        }
+        }finally {
+    setCreando(false); 
+    }
     };
 
     // ── DELETE ─────────────────────────────────────────────────────────────────
@@ -191,6 +196,7 @@
     return {
         tareas,
         cargando,
+        creando,
         modalAbierto,
         titulo,
         descripcion,

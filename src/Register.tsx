@@ -341,8 +341,8 @@ await new Promise((r) => setTimeout(r, 2000));
             </div>
 
             {firebaseError && <p className="register-firebase-error">⚠ {firebaseError}</p>}
-
-            <button className="register-btn" onClick={handleSubmit} disabled={loading}>
+            
+            <button className="register-btn" onClick={handleSubmit} disabled={loading || !isFormValid}>
             {loading ? "Registrando..." : "Registrarse →"}
             </button>
 
