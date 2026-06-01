@@ -4,7 +4,6 @@ import { useTareas } from "./useTareas";
 import { useAuth } from "./Routes/UseAuth";
 import TaskCalendar from "./TaskCalendar";
 import UserCard from "./UserCard";
-import EmailResumenBtn from "./EmailResumenBtn";
 import './styles/TaskHome.css';
 
 
@@ -27,14 +26,13 @@ function TaskHome() {
             Gestiona tus tareas de forma rápida y eficiente
           </p>
           <div className="hero-actions" />
-          <EmailResumenBtn tareas={tareas} />
         </div>
       </section>
 
        {/* Card del usuario */}
       <div className="dashboard-grid">
         <div className="dashboard-col">
-          <h2 className="section-title-dash">Mi <span className="highlight">Perfil</span></h2>
+          <h2 className="section-title-dash-profile">Mi <span className="highlight">Perfil</span></h2>
           <UserCard />
         </div>
         <div className="dashboard-col">
