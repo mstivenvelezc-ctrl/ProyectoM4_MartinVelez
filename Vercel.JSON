@@ -28,7 +28,7 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://apis.google.com https://*.firebaseapp.com; style-src 'self' 'unsafe-inline'; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://ses.us-east-1.amazonaws.com; img-src 'self' data: https://*.googleusercontent.com; frame-src https://accounts.google.com;"
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://apis.google.com https://*.firebaseapp.com https://*.firebase.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://ses.us-east-1.amazonaws.com wss://*.firebaseio.com; img-src 'self' data: blob: https://*.googleusercontent.com https://*.google.com; frame-src https://accounts.google.com https://*.firebaseapp.com; worker-src 'self' blob:;"
         }
       ]
     }
