@@ -172,7 +172,6 @@
                 <input type="checkbox" onChange={(e) => setShowPass(e.target.checked)} />
                 Mostrar contraseña
             </label>
-            <a href="#" className="login-forgot">¿Olvidaste tu contraseña?</a>
             </div>
 
             {error && <p className="login-error">⚠ {error}</p>}
@@ -195,7 +194,7 @@
 
             <div className="login-divider-line" />
             <p className="login-register">
-            ¿No tienes cuenta? <Link to="/register">Regístrate gratis</Link>
+            ¿No tienes cuenta? <Link to="/register">Regístrate aqui</Link>
             </p>
         </div>
         </div>

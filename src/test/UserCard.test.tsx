@@ -1,6 +1,6 @@
     // src/test/email.service.test.ts
     import { describe, it, expect, vi, beforeEach } from 'vitest';
-    import { enviarResumenEmail } from '../email-services';
+    import { enviarResumenEmail } from '../email.service';
     import type { Tarea } from '../Tareas.types';
 
     const tareasMock: Tarea[] = [
