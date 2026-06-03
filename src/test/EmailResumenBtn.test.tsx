@@ -15,7 +15,7 @@
     }),
     }));
 
-    vi.mock('../email-services', () => ({
+    vi.mock('../email.service', () => ({
     enviarResumenEmail: vi.fn(),
     }));
 

@@ -3,6 +3,16 @@
     import { enviarResumenEmail } from '../email.service';
     import type { Tarea } from '../Tareas.types';
 
+    vi.mock('../firebase', () => ({
+    auth: {
+        currentUser: {
+            uid:        'uid-test-123',
+            email:      'test@email.com',
+            getIdToken: vi.fn().mockResolvedValue('fake-token'),
+        },
+    },
+}));
+
     const tareasMock: Tarea[] = [
     {
         id:          '1',
@@ -40,7 +50,7 @@
         '/api/send-email',
         expect.objectContaining({
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: expect.objectContaining({ 'Content-Type': 'application/json' }),
             body: expect.stringContaining('test@email.com'),
         })
         );
