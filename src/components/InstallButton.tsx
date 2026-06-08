@@ -18,6 +18,7 @@
     if (isIOS && !iosDismissed) {
         return (
         <div className="ios-install-hint">
+            <span translate="no"></span>
             <span>Toca <strong>Compartir ⬆</strong> → "Agregalo a tu inicio"</span>
             <button onClick={() => setIosDismissed(true)}>✕</button>
         </div>
