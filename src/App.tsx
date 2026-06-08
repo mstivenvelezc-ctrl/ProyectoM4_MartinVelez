@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from "./Routes/UseAuth";
+import { InstallButton } from "./components/InstallButton";
 import './styles/App.css';
 
 function HomePage() {
@@ -73,8 +74,9 @@ function HomePage() {
           </p>
           <div className="hero-actions">
             <button className="btn-primary" onClick={() => navigate("/login")}>Login</button>
+            <InstallButton />
+            </div>
           </div>
-        </div>
       </section>
 
       {/* STATS */}
